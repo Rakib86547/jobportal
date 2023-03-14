@@ -14,3 +14,8 @@
         width: 100%;
     }
 }
+.swiper-wrapper
+{
+  transition-timing-function: linear !important;
+}
+/* */
