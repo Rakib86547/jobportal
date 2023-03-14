@@ -18,4 +18,8 @@
 {
   transition-timing-function: linear !important;
 }
-/* */
+
+.job-card:hover .icon {
+    background: #1DBF73;
+    transition: .3s;
+}
