@@ -26,6 +26,7 @@ const Navbar = () => {
                         height: '100vh',
                         width: '220px',
                         padding: '0 10px',
+                        zIndex: '999'
                     }}>
                     <Stack spacing={2}>
                         <Box sx={{ width: '150px', padding: '10px 0', marginTop: '15px' }}>

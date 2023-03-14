@@ -19,13 +19,13 @@ const Banner = () => {
             <Box sx={{
                 width: { lg: '50%', md:'100%', sm:'100%'}
             }}>
-                <Typography sx={{}} variant='h3'>Join us & Explore Thousands of Jobs</Typography>
+                <Typography variant='h3' sx={{fontFamily: 'Jost'}}>Join us & Explore Thousands of Jobs</Typography>
                 <Typography variant='h6' sx={{ fontSize: '14px', fontFamily: 'Jost', padding: '15px 0' }}>Find Jobs, Employment & Career Opportunities</Typography>
                 <Box sx={{ marginTop: '15px' }}>
                     <form className='border search-box flex items-center justify-between p-5 relative w-[114%] bg-white'>
-                        <Box sx={{width: {}}}>
+                        <Box className='input1'>
                             <Typography variant='h6' sx={{ color: 'primary.main', fontSize: '18px', fontFamily: 'Jost' }}>What</Typography>
-                            <Box sx={{ display: {lg:'flex', md: 'block'}, alignItems: 'center', justifyContent: 'space-between' }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                 <input type='text' placeholder='job title, keywords' className='focus-visible:outline-none' />
                                 <span className='text-[30px]'><IoSearchOutline /></span>
                             </Box>
@@ -33,15 +33,16 @@ const Banner = () => {
                         <Divider orientation="vertical" flexItem>
 
                         </Divider>
-                        <Box>
+                        <Box className='input1'>
                             <Typography variant='h6' sx={{ color: 'primary.main', fontSize: '18px', fontFamily: 'Jost' }}>Where</Typography>
-                            <Box sx={{ display: 'flex' }}>
+                            <Box sx={{ display: 'flex',  alignItems: 'center', justifyContent: 'space-between' }}>
                                 <input type='text' placeholder='city, country' className='focus-visible:outline-none' />
                                 <span className='text-[30px]'><CiLocationOn /></span>
                             </Box>
                         </Box>
-                        <Link>
-                            <StyleButton title='Find Jobs' className='bg-[#1DBF73] hover:bg-[#00D749] duration-500 py-[15px] px-[34px] rounded text-white' />
+                        <Link className='btn'>
+                            <StyleButton title='Find Jobs' className='bg-[#1DBF73] search-btn hover:bg-[#00D749] duration-500 py-[15px] px-[34px] rounded search-btn text-white' />
+
                         </Link>
                     </form>
                 </Box>

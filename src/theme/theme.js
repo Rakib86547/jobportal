@@ -1,4 +1,5 @@
 const { createTheme } = require("@mui/material");
+// let theme = createTheme ( {})
 
 const theme = createTheme({
     palette: {
@@ -9,13 +10,13 @@ const theme = createTheme({
             transparent: '#e3f8e2'
         },
         typography: {
-            fontSize: '50px',
-            '@media (max-width:768px)': {
-                fontSize: '40px',
-            },
-            '@media (max-width:425px)': {
-                fontSize: '26px',
-            },
+                fontSize: '50px',
+                // '@media (max-width:768px)': {
+                //     fontSize: '40px',
+                // },
+                // '@media (max-width:425px)': {
+                //     fontSize: '26px',
+                // },
         },
         breakpoints: {
             values: {
@@ -25,7 +26,16 @@ const theme = createTheme({
                 lg: "1300px",
                 xl: '1536px',
             },
-        },        
+        },
     }
 });
+theme.typography.h3 = {
+    fontSize: '50px',
+    '@media (max-width:768px)': {
+        fontSize: '40px',
+      },
+    '@media (max-width:425px)': {
+        fontSize: '26px',
+      },
+}
 export default theme;
