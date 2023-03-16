@@ -47,16 +47,16 @@ const JobCategories = () => {
         }
     ]
     return (
-        <Box>
-            <Box sx={{ textAlign: 'center' }}>
+        <Box sx={{padding: '60px 0'}}>
+            <Box sx={{ textAlign: 'center', marginBottom: '50px' }}>
                 <SectionTitle title='Popular Job Categories' />
-                <Typography sx={{ paddingBottom: '50px' }}>2020 jobs live - 293 added today.</Typography>
+                <Typography>2020 jobs live - 293 added today.</Typography>
             </Box>
             <Box>
-                <Grid container spacing={3} justifyContent='center' columns={{ xs: 4, md: 8, lg: 12 }}>
+                <Grid lg={12}item container spacing={3} justifyContent='center'>
                     {
                         jobs.map((job, index) =>
-                            <Grid item  sm={1} md={3} lg={3} >
+                            <Grid item  lg={3} sm={6} xs={12} >
                                 <JobCategoriesDetails key={index} job={job} />
                             </Grid>)
                     }

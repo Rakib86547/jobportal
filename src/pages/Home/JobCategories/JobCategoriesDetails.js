@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Box, Card, CardContent, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../../App.css';
@@ -8,14 +8,17 @@ const JobCategoriesDetails = ({ job }) => {
     const { title, icon, position } = job
     return (
         <Box>
-            <Card sx={{ 
-                maxWidth: 345, 
-                textAlign: 'center', 
+            <Card sx={{
+                // maxWidth: 345, 
+                textAlign: 'center',
                 padding: '40px 20px',
-               '& .css-oqr3r-MuiPaper-root-MuiCard-root': {boxShadow: 'none'}
-                }} className='job-card'>
-                <figure className='w-[70px] h-[70px] icon m-auto rounded-full p-[15px] bg-[#e3f8e2]'>
-                    <img src={icon} alt='' />
+                boxShadow: 'none',
+                border: '1px solid #e3f8e2',
+                '&:hover': { boxShadow: '0 6px 15px rgba(64,79,104,.05)' }
+                // '&:hover': { boxShadow: '0 6px 15px rgba(64,79,104,.05)' }
+            }} className='job-card'>
+                <figure className='w-[70px] h-[70px] icon m-auto rounded-full p-[15px]  bg-[#e3f8e2]'>
+                    <img className='grayscale hover:grayscale-0' src={icon} alt='' />
                 </figure>
                 <CardContent>
                     <Link>
@@ -33,6 +36,7 @@ const JobCategoriesDetails = ({ job }) => {
                     </Typography>
                 </CardContent>
             </Card>
+                
         </Box>
     );
 };
