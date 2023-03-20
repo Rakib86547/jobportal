@@ -3,6 +3,8 @@ import Banner from '../Banner/Banner';
 import Branding from '../Branding/Branding';
 import FeatureJobs from '../FeatureJobs/FeatureJobs';
 import JobCategories from '../JobCategories/JobCategories';
+import Testimonials from '../Testimonials/Testimonials';
+import Company from './Company/Company';
 
 const Home = () => {
     return (
@@ -11,6 +13,8 @@ const Home = () => {
             <Branding />
             <JobCategories />
             <FeatureJobs />
+            <Testimonials />
+            <Company />
         </>
     );
 };

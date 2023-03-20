@@ -1,4 +1,4 @@
-import { Box, Divider, Hidden, IconButton, Stack, Typography } from '@mui/material';
+import { Box, Divider, Hidden, Typography } from '@mui/material';
 import React from 'react';
 import banner from '../../../assests/Banner/Banner.svg'
 import StyleButton from '../../../Components/Button/StyleButton';

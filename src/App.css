@@ -3,32 +3,77 @@
         flex-direction: column;
         width: 100% !important;
     }
+
     .input1 {
         width: 100%;
         margin: 15px 0;
     }
+
     .btn {
-        width: 100%;       
+        width: 100%;
     }
+
     .search-btn {
         width: 100%;
     }
 }
-.swiper-wrapper
-{
-  transition-timing-function: linear !important;
+
+.swiper-wrapper {
+    transition-timing-function: linear !important;
 }
 
 .job-card:hover .icon {
     background: #1DBF73;
     transition: .3s;
 }
-/* */
-/* .css-lgpdd7-MuiPaper-root-MuiCard-root {
-    box-shadow: none !important;
-    border: 1px solid #e3f8e2;
+
+
+.slick-dots li.slick-active {
+    width: 20px !important;
+    background: #1DBF73 ;
 }
-.css-lgpdd7-MuiPaper-root-MuiCard-root:hover {
-    box-shadow: 0 6px 15px rgba(64,79,104,.05) !important;
-    border: 1px solid #e3f8e2;
-} */
+.slick-dots li {
+    margin: 0 5px ;
+    width: 8px !important;
+    height: 8px !important;
+    background: #bfc8cb ;
+    border-radius: 10px ;
+    transition: all .3s ease ;
+}
+.slick-dots li button {
+    font-size: 0 ;
+    line-height: 0 ;
+    display: block ;
+    padding: 5px ;
+    color: transparent ;
+    border: 0 ;
+    outline: none ;
+    background: transparent ;
+}
+.slick-dots li, .slick-dots li button {
+    width: 20px ;
+    height: 20px ;
+    cursor: pointer;
+}
+.slick-dots li button {
+    padding: 0 ;
+}
+.slick-dots li {
+    position: relative ;
+    display: inline-block ;
+    padding: 0 ;
+}
+.slick-dots li button:before{
+    font-size: 0px !important;
+}
+.slick-dots {
+    bottom: -50px !important;
+}
+.slick-slide {
+    margin-left:27px !important;
+  }
+
+  /* the parent */
+  .slick-list {
+    margin-left:-27px !important;
+  }

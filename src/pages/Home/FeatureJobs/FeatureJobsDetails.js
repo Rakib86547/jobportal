@@ -48,7 +48,7 @@ const FeatureJobsDetails = ({ job }) => {
                 </CardContent>
                 <Box>
                     <IconButton>
-                        <BsBookmarkPlus />
+                        <BsBookmarkPlus title='Save' />
                     </IconButton>
                 </Box>
             </Card>                
