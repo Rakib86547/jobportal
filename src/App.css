@@ -70,7 +70,8 @@
     bottom: -50px !important;
 }
 .slick-slide {
-    margin-left:27px !important;
+    /* margin-left:27px !important; */
+    padding: 0 20px;
   }
 
   /* the parent */
