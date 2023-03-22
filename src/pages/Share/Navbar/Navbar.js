@@ -5,15 +5,24 @@ import logo from '../../../assests/Logo/logo.png';
 import StyleButton from '../../../Components/Button/StyleButton';
 import { VscThreeBars } from 'react-icons/vsc'
 import { RxCross1 } from 'react-icons/rx'
+import LoginSignup from '../LoginSignup/LoginSignup';
 
 const Navbar = () => {
     const [open, setOpen] = useState(true);
+    const [modalOpen, setModalOpen] = useState(false);
     let responseClassName;
     if (open) {
         responseClassName = 'left-[-100%] duration-500'
     } else {
         responseClassName = 'left-0 duration-500'
     }
+    const handleClickOpen = () => {
+        setModalOpen(true);
+    };
+
+    const handleClose = () => {
+        setModalOpen(false);
+    };
     return (
         <Box>
             {/* -----------responsive navbar---------- */}
@@ -79,7 +88,7 @@ const Navbar = () => {
                                 className={({ isActive }) => isActive ? 'text-[#1DBF73]' : undefined}>
                                 Contact
                             </NavLink>
-                            <NavLink>
+                            <NavLink onClick={handleClickOpen}>
                                 <StyleButton title='Login / Register' className='bg-[#e3f8e2] duration-500 hover:bg-[#1DBF73] hover:text-[#fff] py-2 px-5 text-[#1DBF73] rounded'></StyleButton>
                             </NavLink>
                         </Stack>
@@ -94,8 +103,12 @@ const Navbar = () => {
                     </Hidden>
                 </Box>
             </Box>
+            {
+                modalOpen && <LoginSignup open={modalOpen} handleClose={handleClose} setModalOpen={setModalOpen} />
+            }
         </Box>
     );
 };
+
 
 export default Navbar;

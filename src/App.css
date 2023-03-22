@@ -78,3 +78,32 @@
   .slick-list {
     margin-left:-27px !important;
   }
+
+  /* -------------- footer ---------- */
+  .footer-box {
+    margin-left: -10px;
+    max-width: 1324px;
+    margin-right: -34px;
+  }
+  @media screen and (max-width: 768px) {
+    .footer-box {
+        padding: 0 40px;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .footer{
+        flex-direction: column-reverse;        
+    }
+    .footer-icon {
+        margin-bottom: 10px;
+    }
+  }
+  .hidden-button {
+    /* display: none !important; */
+    bottom: -44px !important;
+  }
+
+  .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+    max-width: 500px;
+    width: 100%;
+  }
