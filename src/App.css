@@ -104,6 +104,10 @@
   }
 
   .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
-    max-width: 500px;
+    max-width: 500px !important;
     width: 100%;
+  }
+  .css-1kjo7z6-MuiFormLabel-root-MuiInputLabel-root {
+    font-size: 20px !important;
+    /* font-weight: 600 !important; */
   }

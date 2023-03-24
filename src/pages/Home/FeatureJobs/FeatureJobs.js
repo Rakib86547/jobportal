@@ -80,8 +80,8 @@ const FeatureJobs = () => {
                 <Grid lg={12} item container spacing={3} justifyContent='center'>
                     {
                         features.map((job, index) =>
-                            <Grid item lg={4} sm={6} xs={12} >
-                                <FeatureJobsDetails key={index} job={job} />
+                            <Grid key={index} item lg={4} sm={6} xs={12} >
+                                <FeatureJobsDetails key={index}  job={job} />
                             </Grid>)
                     }
                 </Grid>

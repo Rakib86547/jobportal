@@ -1,5 +1,4 @@
 import React from 'react';
-// import LoginSignup from '../../Share/LoginSignup/LoginSignup';
 import Banner from '../Banner/Banner';
 import Branding from '../Branding/Branding';
 import FeatureJobs from '../FeatureJobs/FeatureJobs';
@@ -10,8 +9,7 @@ import Company from './Company/Company';
 
 const Home = () => {
     return (
-        <>
-            {/* <LoginSignup /> */}
+        <>            
             <Banner />
             <Branding />
             <JobCategories />

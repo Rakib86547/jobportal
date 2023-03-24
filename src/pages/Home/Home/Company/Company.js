@@ -92,8 +92,8 @@ const Company = () => {
             {/* ------------slider ----------*/}
             <Slider {...settings}>
                 {
-                    companies.map(company =>
-                        <Box>
+                    companies.map((company, i) =>
+                        <Box key={i} >
                             <Card sx={{
                                 // maxWidth: 345, 
                                 textAlign: 'center',

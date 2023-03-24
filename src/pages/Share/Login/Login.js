@@ -1,8 +1,9 @@
-import { Box, Button, Divider, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, Checkbox, Divider, FormControl, FormControlLabel, FormGroup, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiFillGithub, AiOutlineGoogle } from 'react-icons/ai';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import StyleButton from '../../../Components/Button/StyleButton';
 
 const Login = () => {
@@ -21,8 +22,13 @@ const Login = () => {
                     fontSize: '25px',
                     fontWeight: 500,
                     padding: '30px 0'
-                }}>Create an Account</Typography>
-                <Stack spacing={2}>
+                }}>Login Your Account</Typography>
+                <Stack spacing={2}
+                    sx={{
+                        '& .css-1kjo7z6-MuiFormLabel-root-MuiInputLabel-root.Mui-focused': { fontSize: '20px' },
+                        '& .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input': { fontWeight: 'bolder' },
+                    }}
+                >
                     <TextField
                         sx={{ width: '100%', margin: '' }}
                         {...register("email")}
@@ -50,9 +56,18 @@ const Login = () => {
                         />
                     </FormControl>
 
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <FormGroup sx={{
+                            '& .css-rlh8pc-MuiButtonBase-root-MuiCheckbox-root.Mui-checked, .css-rlh8pc-MuiButtonBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate': { color: '#1DBF73' },
+                        }} >
+                            <FormControlLabel control={<Checkbox defaultChecked />} label="Remember Me" />
+                        </FormGroup>
+                        <Link><Typography>Forgot Password?</Typography></Link>
+                    </Box>
                     <Box sx={{ width: '100%' }}>
                         <StyleButton title='Login' className='duration-500 w-full bg-[#1DBF73] hover:bg-[#00D749] text-[#fff] py-[18px] px-[35px] rounded' />
                     </Box>
+                    {/* <Typography sx={{textAlign: 'center'}}>Don`t have an account <Link to='/signup'>Signup</Link></Typography> */}
                     <Divider>or</Divider>
                     <Box sx={{ textAlign: 'center', display: 'flex', justifyContent: 'space-between' }}>
                         <Button sx={{
