@@ -3,16 +3,21 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiFillGithub, AiOutlineGoogle } from 'react-icons/ai';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { useDispatch, useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import StyleButton from '../../../Components/Button/StyleButton';
+import Spinner from '../../../Components/Spinner/Spinner';
+import { signInUser } from '../../../features/auth/authSlice';
 
 const Login = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-
+    const dispatch = useDispatch();
+    const { isLoading } = useSelector(state => state.auth);
     const onSubmit = data => {
-        console.log(data)
+        dispatch(signInUser({ email: data.email, password: data.password }))
     };
     return (
         <Box>
@@ -31,13 +36,15 @@ const Login = () => {
                 >
                     <TextField
                         sx={{ width: '100%', margin: '' }}
-                        {...register("email")}
+                        {...register("email", { required: 'Email is Required' })}
                         id="outlined-basic" label="Email" variant="outlined" />
-                    {/* <br /> */}
+
+                    {errors.email && <span className='text-red-500'>{errors.email?.message}</span>}
                     {/* ------- password ---------- */}
                     <FormControl sx={{ m: 0, width: '100%' }} variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                         <OutlinedInput
+                            {...register('password', { required: 'Password is Required' })}
                             id="outlined-adornment-password"
                             type={showPassword ? 'text' : 'password'}
                             endAdornment={
@@ -55,7 +62,7 @@ const Login = () => {
                             label="Password"
                         />
                     </FormControl>
-
+                    {errors.password && <span className='text-red-500'>{errors.password?.message}</span>}
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <FormGroup sx={{
                             '& .css-rlh8pc-MuiButtonBase-root-MuiCheckbox-root.Mui-checked, .css-rlh8pc-MuiButtonBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate': { color: '#1DBF73' },
@@ -65,7 +72,7 @@ const Login = () => {
                         <Link><Typography>Forgot Password?</Typography></Link>
                     </Box>
                     <Box sx={{ width: '100%' }}>
-                        <StyleButton title='Login' className='duration-500 w-full bg-[#1DBF73] hover:bg-[#00D749] text-[#fff] py-[18px] px-[35px] rounded' />
+                        <StyleButton title={isLoading ? <Spinner /> : 'Sign In'} className='duration-500 w-full bg-[#1DBF73] hover:bg-[#00D749] text-[#fff] py-[18px] px-[35px] rounded' />
                     </Box>
                     {/* <Typography sx={{textAlign: 'center'}}>Don`t have an account <Link to='/signup'>Signup</Link></Typography> */}
                     <Divider>or</Divider>

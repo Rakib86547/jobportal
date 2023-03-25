@@ -6,9 +6,12 @@ import { FiEye } from 'react-icons/fi'
 import { AiFillGithub, AiOutlineGoogle } from 'react-icons/ai';
 import StyleButton from '../../../Components/Button/StyleButton';
 import '../../../App.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { createUser } from '../../../features/auth/authSlice';
+import Spinner from '../../../Components/Spinner/Spinner';
 
 const Signup = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -16,25 +19,73 @@ const Signup = () => {
     const [value, setValue] = useState('');
     const [error, setError] = useState(false);
     const [errorText, setErrorText] = useState('');
+    const dispatch = useDispatch();
+    const { isLoading } = useSelector(state => state.auth)
+
+
+    // checking validate
+    const [lowerValidated, setLowerValidated] = useState(false);
+    const [upperValidated, setUpperValidated] = useState(false);
+    const [numberValidated, setNumberValidated] = useState(false);
+    const [specialValidated, setSpecialValidated] = useState(false);
+    const [lengthValidated, setLengthValidated] = useState(false);
+    const [isShowPassword, setIsShowPassword] = useState("");
+
+    const handlePassword = (value) => {
+        setIsShowPassword(value);
+        const lower = new RegExp("(?=.*[a-z])");
+        const upper = new RegExp("(?=.*[A-Z])");
+        const number = new RegExp("(?=.*[0-9])");
+        const special = new RegExp("(?=.*[!@#$%^&*])");
+        const length = new RegExp("(?=.{6,})");
+
+
+        if (lower.test(value)) {
+            setLowerValidated(true);
+        } else {
+            setLowerValidated(false);
+        }
+        if (upper.test(value)) {
+            setUpperValidated(true);
+        } else {
+            setUpperValidated(false);
+        }
+        if (number.test(value)) {
+            setNumberValidated(true);
+        } else {
+            setNumberValidated(false);
+        }
+        if (special.test(value)) {
+            setSpecialValidated(true);
+        } else {
+            setSpecialValidated(false);
+        }
+        if (length.test(value)) {
+            setLengthValidated(true);
+        } else {
+            setLengthValidated(false);
+        }
+    };
 
     const handleRadioChange = (event) => {
         setValue(event.target.value);
-        // setHelperText(' ');
         setError(false);
     };
 
+
     const onSubmit = data => {
         if (errorText === '' && value === '') {
-            setErrorText('Please Confirm Your Type')
+            setErrorText('Please Confirm Your Role')
         }
+
         else {
-            
             setErrorText('')
-            const userInfo = {
-                data,
-                role: value
-            }
-            console.log(userInfo)
+            // const userInfo = {
+            //     email: data.email,
+            //     password: data.password,
+            //     // role: value
+            // }
+            dispatch(createUser({ email: data.email, password: data.password }))
         }
     };
     return (
@@ -64,13 +115,22 @@ const Signup = () => {
                         <FormControlLabel value="Employer" control={<Radio />} label="Employer" />
                     </RadioGroup>
                 </FormControl>
-                    {errorText ? <p className='bg-red-500'>{errorText}</p> : undefined}
-                    {/* {errorText && <p className='bg-red-500'>{errorText}</p>} */}
+                {errorText ? <p className='text-red-500 text-center -mt-4 pb-9'>{errorText}</p> : undefined}
+
 
                 <Stack sx={{
                     '& .css-1kjo7z6-MuiFormLabel-root-MuiInputLabel-root.Mui-focused': { fontSize: '20px' },
                     '& .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input': { fontWeight: 'bolder' },
                 }} spacing={2}>
+
+                    {/* ------- Name -------- */}
+                    <TextField
+                        sx={{ width: '100%', margin: '' }}
+                        {...register("name", { required: 'Name is required' })}
+                        id="outlined-basic" label="Name" variant="outlined" />
+                    {errors.name && <span className='text-red-500'>{errors.name?.message}</span>}
+
+                    {/* ------- Email -------- */}
                     <TextField
                         sx={{ width: '100%', margin: '' }}
                         {...register("email", { required: 'Email Address is required' })}
@@ -81,7 +141,19 @@ const Signup = () => {
                     <FormControl sx={{ m: 0, width: '100%' }} variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                         <OutlinedInput
-                            {...register("password", { required: true })}
+                            {...register("password", {
+                                required: 'Password is Required',
+                                minLength: {
+                                    value: 6,
+                                    message: "Password Must be 6 Character",
+                                },
+                                pattern: {
+                                    value: /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]/,
+                                    // message:
+                                    //   "Password Should be a-z, A-Z, number and special character",
+                                },
+                            })}
+                            onChange={(e) => handlePassword(e.target.value)}
                             id="outlined-adornment-password"
                             type={showPassword ? 'text' : 'password'}
                             endAdornment={
@@ -98,13 +170,65 @@ const Signup = () => {
                             label="Password"
                         />
                     </FormControl>
-                    {errors.password && <span className='text-red-500'>Password is Required</span>}
+                    {isShowPassword && (
+                        <p className="">
+                            <></>
+                            <span
+                                className={
+                                    lowerValidated ? "text-green-500" : "text-red-500"
+                                }
+                            >
+                                Lowercase,
+                            </span>{" "}
+                            <></>
+                            <span
+                                className={
+                                    upperValidated ? "text-green-500" : "text-red-500"
+                                }
+                            >
+                                Uppercase,
+                            </span>{" "}
+                            <></>
+                            <span
+                                className={
+                                    numberValidated ? "text-green-500" : "text-red-500"
+                                }
+                            >
+                                Number,
+                            </span>{" "}
+                            <></>
+                            <span
+                                className={
+                                    specialValidated ? "text-green-500" : "text-red-500"
+                                }
+                            >
+                                Special Character,
+                            </span>{" "}
+                            <></>
+                            <span
+                                className={
+                                    lengthValidated ? "text-green-500" : "text-red-500"
+                                }
+                            >
+                                6 Character,
+                            </span>{" "}
+                            <></>
+                        </p>
+                    )}
+                    {errors.password && <span className='text-red-500'>{errors.password?.message}</span>}
 
                     {/* --------- confirm password ---------- */}
                     <FormControl sx={{ m: 0, width: '100%' }} variant="outlined" >
                         <InputLabel htmlFor="outlined-adornment-confirm-password">Confirm Password</InputLabel>
                         <OutlinedInput
-                            {...register("confirmPassword", { required: true })}
+                            {...register("confirmPassword", {
+                                required: 'Confirm Password is Required',
+                                validate: (value) => {
+                                    if (watch("password") !== value) {
+                                        return "Your Password Did Not Match";
+                                    }
+                                },
+                            })}
                             id="outlined-adornment-confirm-password"
                             type={confirmPassword ? 'text' : 'password'}
                             endAdornment={
@@ -121,10 +245,10 @@ const Signup = () => {
                             label="confirmPassword"
                         />
                     </FormControl>
-                    {errors.confirmPassword && <span className='text-red-500'>Password is Required</span>}
+                    {errors.confirmPassword && <span className='text-red-500'>{errors.confirmPassword?.message}</span>}
 
                     <Box sx={{ width: '100%' }}>
-                        <StyleButton title='Sign Up' className='duration-500 w-full bg-[#1DBF73] hover:bg-[#00D749] text-[#fff] py-[18px] px-[35px] rounded' />
+                        <StyleButton title={isLoading ? <Spinner /> : 'Sign Up'} className='duration-500 w-full bg-[#1DBF73] hover:bg-[#00D749] text-[#fff] py-[18px] px-[35px] rounded' />
                     </Box>
                     <Divider>or</Divider>
                     <Box sx={{ textAlign: 'center', display: 'flex', justifyContent: 'space-between' }}>

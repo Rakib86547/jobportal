@@ -10,7 +10,7 @@ import Company from './Company/Company';
 const Home = () => {
     return (
         <>            
-            <Banner />
+            <Banner />            
             <Branding />
             <JobCategories />
             <FeatureJobs />
