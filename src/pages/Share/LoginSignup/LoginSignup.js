@@ -9,7 +9,7 @@ import '../../../App.css';
 
 
 
-const LoginSignup = ({ open, handleClose }) => {
+const LoginSignup = ({ open, handleClose, handleClickOpen, setOpen }) => {
     const [value, setValue] = useState('1');
 
     const handleChange = (event, newValue) => {
@@ -36,8 +36,8 @@ const LoginSignup = ({ open, handleClose }) => {
                                 <Tab label="Sign Up" value="2" />
                             </TabList>
                         </Box>
-                        <TabPanel value="1"><Login /></TabPanel>
-                        <TabPanel value="2"><Signup /></TabPanel>
+                        <TabPanel value="1"><Login handleClose={handleClose} setOpen={setOpen}  handleClickOpen={handleClickOpen} /></TabPanel>
+                        <TabPanel value="2"><Signup handleClose={handleClose} setOpen={setOpen} handleClickOpen={handleClickOpen} /></TabPanel>
                     </TabContext>
                 </Box>
                 <DialogActions >

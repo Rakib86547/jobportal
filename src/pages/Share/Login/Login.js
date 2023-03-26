@@ -1,6 +1,7 @@
 import { Box, Button, Checkbox, Divider, FormControl, FormControlLabel, FormGroup, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { AiFillGithub, AiOutlineGoogle } from 'react-icons/ai';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,17 +9,33 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import StyleButton from '../../../Components/Button/StyleButton';
 import Spinner from '../../../Components/Spinner/Spinner';
-import { signInUser } from '../../../features/auth/authSlice';
+import { loading, signInUser } from '../../../features/auth/authSlice';
 
-const Login = () => {
+const Login = ({ handleClose }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
+
+    // const navigate = useNavigate();
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const dispatch = useDispatch();
-    const { isLoading } = useSelector(state => state.auth);
+    const { isLoading, user, error:errorss } = useSelector(state => state.auth);
     const onSubmit = data => {
-        dispatch(signInUser({ email: data.email, password: data.password }))
+        dispatch(signInUser({ email: data.email, password: data.password }))      
+         setTimeout(() => {
+                handleClose()
+            }, 4000);
     };
+    useEffect(() => {
+        if (!user) {
+            dispatch(loading())
+        }
+    }, [user])
+    
+    useEffect(() => {
+        if (user) {
+            toast.success('Login Success')
+        }
+    }, [user])
     return (
         <Box>
             <form onSubmit={handleSubmit(onSubmit)}>

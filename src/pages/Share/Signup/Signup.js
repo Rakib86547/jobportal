@@ -1,5 +1,5 @@
 import { Box, Button, Divider, FormControl, FormControlLabel, IconButton, InputAdornment, InputLabel, OutlinedInput, Radio, RadioGroup, Stack, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FiEyeOff } from 'react-icons/fi'
 import { FiEye } from 'react-icons/fi'
@@ -9,19 +9,20 @@ import '../../../App.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from '../../../features/auth/authSlice';
 import Spinner from '../../../Components/Spinner/Spinner';
+import { toast } from 'react-hot-toast';
 
-const Signup = () => {
+const Signup = ({ handleClose, handleClickOpen, setOpen }) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleClickConfirmPassword = () => setConfirmPassword((show) => !show);
     const [value, setValue] = useState('');
-    const [error, setError] = useState(false);
+    const [radioError, setRadioError] = useState(false);
     const [errorText, setErrorText] = useState('');
     const dispatch = useDispatch();
-    const { isLoading } = useSelector(state => state.auth)
-
+    const { isLoading, user, isError, error } = useSelector(state => state.auth)
+    console.log('sign-up-user', user)
 
     // checking validate
     const [lowerValidated, setLowerValidated] = useState(false);
@@ -69,7 +70,7 @@ const Signup = () => {
 
     const handleRadioChange = (event) => {
         setValue(event.target.value);
-        setError(false);
+        setRadioError(false);
     };
 
 
@@ -86,8 +87,23 @@ const Signup = () => {
             //     // role: value
             // }
             dispatch(createUser({ email: data.email, password: data.password }))
+            if (!error) {
+                setTimeout(() => {
+                    handleClose()
+                }, 5000);
+             } 
+             // else {
+            //     handleClickOpen()
+            //     setOpen(true)
+            // }
         }
     };
+
+    useEffect(() => {
+        if(isError) {
+            toast.error(error)
+        }
+    }, [isError, error])
     return (
         <Box>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -247,6 +263,7 @@ const Signup = () => {
                     </FormControl>
                     {errors.confirmPassword && <span className='text-red-500'>{errors.confirmPassword?.message}</span>}
 
+                    {isError && <p className='text-red-500'>{error}</p>}
                     <Box sx={{ width: '100%' }}>
                         <StyleButton title={isLoading ? <Spinner /> : 'Sign Up'} className='duration-500 w-full bg-[#1DBF73] hover:bg-[#00D749] text-[#fff] py-[18px] px-[35px] rounded' />
                     </Box>

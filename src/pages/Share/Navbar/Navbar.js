@@ -6,10 +6,17 @@ import StyleButton from '../../../Components/Button/StyleButton';
 import { VscThreeBars } from 'react-icons/vsc'
 import { RxCross1 } from 'react-icons/rx'
 import LoginSignup from '../LoginSignup/LoginSignup';
+import { useDispatch, useSelector } from 'react-redux';
+import { signOut } from 'firebase/auth';
+import auth from '../../../firebase/firebase.config';
+import { logOut } from '../../../features/auth/authSlice';
 
 const Navbar = () => {
     const [open, setOpen] = useState(true);
     const [modalOpen, setModalOpen] = useState(false);
+    const { user } = useSelector(state => state.auth);
+    const dispatch = useDispatch()
+    // console.log(user)
     let responseClassName;
     if (open) {
         responseClassName = 'left-[-100%] duration-500'
@@ -23,6 +30,13 @@ const Navbar = () => {
     const handleClose = () => {
         setModalOpen(false);
     };
+
+    const handleSignOut = () => {
+        signOut(auth)
+            .then(() => {
+                dispatch(logOut())
+            })
+    }
     return (
         <Box>
             {/* -----------responsive navbar---------- */}
@@ -88,9 +102,16 @@ const Navbar = () => {
                                 className={({ isActive }) => isActive ? 'text-[#1DBF73]' : undefined}>
                                 Contact
                             </NavLink>
+                            {
+                                user ?
+                                <NavLink onClick={handleSignOut}>
+                                    <StyleButton title='Logout' className='bg-[#e3f8e2] duration-500 hover:bg-[#1DBF73] hover:text-[#fff] py-2 px-5 text-[#1DBF73] rounded'></StyleButton>
+                                </NavLink>
+                                :
                             <NavLink onClick={handleClickOpen}>
                                 <StyleButton title='Login / Register' className='bg-[#e3f8e2] duration-500 hover:bg-[#1DBF73] hover:text-[#fff] py-2 px-5 text-[#1DBF73] rounded'></StyleButton>
                             </NavLink>
+                            }                           
                         </Stack>
                     </Hidden>
                     <Hidden mdUp>
@@ -104,7 +125,7 @@ const Navbar = () => {
                 </Box>
             </Box>
             {
-                modalOpen && <LoginSignup open={modalOpen} handleClose={handleClose} setModalOpen={setModalOpen} />
+                modalOpen && <LoginSignup open={modalOpen} handleClose={handleClose} setOpen={setOpen} handleClickOpen={handleClickOpen} setModalOpen={setModalOpen} />
             }
         </Box>
     );
