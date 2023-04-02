@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FiEyeOff } from 'react-icons/fi'
 import { FiEye } from 'react-icons/fi'
-import { AiFillGithub, AiOutlineGoogle } from 'react-icons/ai';
+import { AiOutlineGoogle } from 'react-icons/ai';
 import StyleButton from '../../../Components/Button/StyleButton';
 import '../../../App.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { createUser } from '../../../features/auth/authSlice';
+import { createUser, googleSignIn, loading, saveUsersInDB, } from '../../../features/auth/authSlice';
 import Spinner from '../../../Components/Spinner/Spinner';
 import { toast } from 'react-hot-toast';
 
@@ -21,8 +21,7 @@ const Signup = ({ handleClose, handleClickOpen, setOpen }) => {
     const [radioError, setRadioError] = useState(false);
     const [errorText, setErrorText] = useState('');
     const dispatch = useDispatch();
-    const { isLoading, user, isError, error } = useSelector(state => state.auth)
-    console.log('sign-up-user', user)
+    const { isLoading, isError, error } = useSelector(state => state.auth);
 
     // checking validate
     const [lowerValidated, setLowerValidated] = useState(false);
@@ -81,29 +80,40 @@ const Signup = ({ handleClose, handleClickOpen, setOpen }) => {
 
         else {
             setErrorText('')
-            // const userInfo = {
-            //     email: data.email,
-            //     password: data.password,
-            //     // role: value
-            // }
-            dispatch(createUser({ email: data.email, password: data.password }))
-            if (!error) {
-                setTimeout(() => {
-                    handleClose()
-                }, 5000);
-             } 
-             // else {
-            //     handleClickOpen()
-            //     setOpen(true)
-            // }
+            const userInfo = {
+                email: data.email,
+                password: data.password,
+                role: value,
+                name: data.name
+            }
+            dispatch(createUser({ email: data.email, password: data.password }));
+            setTimeout(() => {
+                handleClose()
+            }, 5000);
+            dispatch(saveUsersInDB(userInfo))
         }
     };
 
     useEffect(() => {
-        if(isError) {
+        if (isError) {
             toast.error(error)
         }
     }, [isError, error])
+
+    const handleGoogleSign = () => {
+        dispatch(googleSignIn())
+        dispatch(loading())
+        setTimeout(() => {
+            handleClose()
+        }, 2000);
+    }
+    // const handleGithubSign = () => {
+    //     dispatch(githubSignIn())
+    //     dispatch(loading())
+    //     setTimeout(() => {
+    //         handleClose()
+    //     }, 2000);
+    // }
     return (
         <Box>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -268,28 +278,32 @@ const Signup = ({ handleClose, handleClickOpen, setOpen }) => {
                         <StyleButton title={isLoading ? <Spinner /> : 'Sign Up'} className='duration-500 w-full bg-[#1DBF73] hover:bg-[#00D749] text-[#fff] py-[18px] px-[35px] rounded' />
                     </Box>
                     <Divider>or</Divider>
-                    <Box sx={{ textAlign: 'center', display: 'flex', justifyContent: 'space-between' }}>
-                        <Button sx={{
-                            border: '1px solid #202124',
-                            borderRadius: '8px',
-                            width: '47%',
-                            padding: '12px 0',
-                            color: '#202124',
-                            fontSize: '13px',
-                            transition: '.3s',
-                            '&:hover': { background: '#202124', color: 'white', transition: '.3s' }
-                        }}><AiFillGithub className=' mr-1 text-[20px] flex items-center' /> Login With Github</Button>
+                    <Box sx={{ textAlign: 'center', display: 'flex', justifyContent: 'center' }}>
+                        {/* <Button
+                            // onClick={handleGithubSign}
+                            sx={{
+                                border: '1px solid #202124',
+                                borderRadius: '8px',
+                                width: '47%',
+                                padding: '12px 0',
+                                color: '#202124',
+                                fontSize: '13px',
+                                transition: '.3s',
+                                '&:hover': { background: '#202124', color: 'white', transition: '.3s' }
+                            }}><AiFillGithub className=' mr-1 text-[20px] flex items-center' /> Login With Github</Button> */}
 
-                        <Button sx={{
-                            border: '1px solid #dc4d28',
-                            borderRadius: '8px',
-                            width: '47%',
-                            padding: '12px 0',
-                            color: '#dc4d28',
-                            fontSize: '13px',
-                            transition: '.3s',
-                            '&:hover': { background: '#dc4d28', color: 'white', transition: '.3s' }
-                        }}><AiOutlineGoogle className=' mr-1 text-[20px] flex items-center' /> Login With Google</Button>
+                        <Button
+                            onClick={handleGoogleSign}
+                            sx={{
+                                border: '1px solid #dc4d28',
+                                borderRadius: '8px',
+                                width: '100%',
+                                padding: '12px 0',
+                                color: '#dc4d28',
+                                fontSize: '13px',
+                                transition: '.3s',
+                                '&:hover': { background: '#dc4d28', color: 'white', transition: '.3s' }
+                            }}><AiOutlineGoogle className=' mr-1 text-[20px] flex items-center' /> Login With Google</Button>
                     </Box>
                 </Stack>
             </form>

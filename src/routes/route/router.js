@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Dashboard from "../../Layout/Main/Dashboard/Dashboard";
 import Main from "../../Layout/Main/Main";
 import Contact from "../../pages/Contact/Contact";
 import FindJobs from "../../pages/FindJobs/FindJobs";
@@ -33,5 +34,16 @@ const router = createBrowserRouter([{
             element: <Signup />
         },
     ],
-}]);
+},
+
+{
+    path: '/dashboard',
+    element: <Dashboard />,
+    errorElement: <Error />,
+    children: [
+
+    ]
+}
+
+]);
 export default router;

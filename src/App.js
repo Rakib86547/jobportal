@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 import './App.css';
 import ScrollButton from './Components/ScrollButton/ScrollButton';
-import { setUser } from './features/auth/authSlice';
+import { getUser, veryfieEmail } from './features/auth/authSlice';
 import auth from './firebase/firebase.config';
 import router from './routes/route/router';
 import theme from './theme/theme';
@@ -14,9 +14,8 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // console.log(user)
-        dispatch(setUser(user))
+      if (user) {        
+        dispatch(getUser(user.email))           
       }
     })
   }, [])

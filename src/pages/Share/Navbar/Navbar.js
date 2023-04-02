@@ -16,7 +16,7 @@ const Navbar = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const { user } = useSelector(state => state.auth);
     const dispatch = useDispatch()
-    // console.log(user)
+    // console.log('uid', user)
     let responseClassName;
     if (open) {
         responseClassName = 'left-[-100%] duration-500'
@@ -103,15 +103,21 @@ const Navbar = () => {
                                 Contact
                             </NavLink>
                             {
-                                user ?
-                                <NavLink onClick={handleSignOut}>
-                                    <StyleButton title='Logout' className='bg-[#e3f8e2] duration-500 hover:bg-[#1DBF73] hover:text-[#fff] py-2 px-5 text-[#1DBF73] rounded'></StyleButton>
+                                user?.email && <NavLink to='/dashboard'
+                                    className={({ isActive }) => isActive ? 'text-[#1DBF73]' : undefined}>
+                                    Dashboard
                                 </NavLink>
-                                :
-                            <NavLink onClick={handleClickOpen}>
-                                <StyleButton title='Login / Register' className='bg-[#e3f8e2] duration-500 hover:bg-[#1DBF73] hover:text-[#fff] py-2 px-5 text-[#1DBF73] rounded'></StyleButton>
-                            </NavLink>
-                            }                           
+                            }
+                            {
+                                user?.email ?
+                                    <NavLink onClick={handleSignOut}>
+                                        <StyleButton title='Logout' className='bg-[#e3f8e2] duration-500 hover:bg-[#1DBF73] hover:text-[#fff] py-2 px-5 text-[#1DBF73] rounded'></StyleButton>
+                                    </NavLink>
+                                    :
+                                    <NavLink onClick={handleClickOpen}>
+                                        <StyleButton title='Login / Register' className='bg-[#e3f8e2] duration-500 hover:bg-[#1DBF73] hover:text-[#fff] py-2 px-5 text-[#1DBF73] rounded'></StyleButton>
+                                    </NavLink>
+                            }
                         </Stack>
                     </Hidden>
                     <Hidden mdUp>
