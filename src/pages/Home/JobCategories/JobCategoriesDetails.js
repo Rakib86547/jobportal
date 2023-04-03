@@ -5,7 +5,7 @@ import '../../../App.css';
 
 
 const JobCategoriesDetails = ({ job }) => {
-    const { title, icon, position } = job
+    const { title, icon, position, categories_id } = job
     return (
         <Box>
             <Card sx={{
@@ -21,7 +21,7 @@ const JobCategoriesDetails = ({ job }) => {
                     <img className='grayscale hover:grayscale-0' src={icon} alt='' />
                 </figure>
                 <CardContent>
-                    <Link>
+                    <Link to={`/jobs/${categories_id}`}>
                         <Typography
                             sx={{
                                 fontSize: '18px',
@@ -36,7 +36,7 @@ const JobCategoriesDetails = ({ job }) => {
                     </Typography>
                 </CardContent>
             </Card>
-                
+
         </Box>
     );
 };

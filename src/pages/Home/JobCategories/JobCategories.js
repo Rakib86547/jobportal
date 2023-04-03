@@ -3,11 +3,12 @@ import React from 'react';
 import SectionTitle from '../../../Components/Button/SectionTitle/SectionTitle';
 import JobCategoriesDetails from './JobCategoriesDetails';
 import { useGetCategoriesJobsQuery } from '../../../features/auth/authApi';
+import Loading from '../../../Components/Loading/Loading';
 
 const JobCategories = () => {
     const { data: jobs, isLoading, isError } = useGetCategoriesJobsQuery();
     if (isLoading) {
-        return  <Typography variant='h5'>Loading......</Typography>
+        return  <Loading />
     }
     if(isError){
         return <Typography variant='h5'>Something went wrong...</Typography>
