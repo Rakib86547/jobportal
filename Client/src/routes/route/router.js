@@ -18,6 +18,7 @@ import ManageJobs from "../../pages/ManageJobs/ManageJobs";
 import AllApplicants from "../../pages/AllApplicants/AllApplicants";
 import DashboardLayout from "../../Layout/Main/Dashboard/DashboardLayout";
 import Welcome from "../../pages/Welcome/Welcome";
+import EditProfile from "../../pages/EditProfile/EditProfile";
 
 
 const router = createBrowserRouter([{
@@ -100,6 +101,10 @@ const router = createBrowserRouter([{
         {
             path: '/dashboard/profile',
             element: <MyProfile />
+        },
+        {
+            path: '/dashboard/edit-profile',
+            element: <EditProfile />
         }
     ]
 },

@@ -8,17 +8,30 @@ import { CiLocationOn } from 'react-icons/ci';
 import { VscBriefcase } from 'react-icons/vsc';
 import { GiMoneyStack } from 'react-icons/gi'
 import StyleButton from '../../Components/Button/StyleButton';
+import { useSelector } from 'react-redux';
+import { useApplyMutation } from '../../features/auth/jobApi';
+
 
 const JobDetails = () => {
-    const { id } = useParams();    
-    console.log(id)
+    const user = useSelector((state) => state.auth.user);
+    const { id } = useParams();
     const { data, isLoading, isError } = useGetJobDetailsQuery(id);
-    console.log(data)
+    const [apply] = useApplyMutation()
     if (isLoading) {
         return <Loading />
     };
     if (isError) {
         return <Typography variant='h5'>Something Went Wrong....</Typography>
+    }
+
+    const handleApply = () => {
+        const applyData = {
+            jobId: data?.data?._id,
+            userId: user?._id,
+            email: user?.email
+        }
+        apply(data?.data?._id, applyData)
+        console.log('apply', applyData)
     }
     return (
         <Box sx={{ padding: '60px 0px' }}>
@@ -28,7 +41,7 @@ const JobDetails = () => {
                 <Card sx={{
                     padding: '32px 20px',
                     display: 'flex',
-                    flexDirection: {sm: 'row', lg: 'row', md: 'row', xs: 'column'},
+                    flexDirection: { sm: 'row', lg: 'row', md: 'row', xs: 'column' },
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     boxShadow: 'none',
@@ -69,14 +82,16 @@ const JobDetails = () => {
                     <Box sx={{
                         display: 'flex'
                     }}>
-                       <Link><StyleButton title='Apply Now' className='bg-[#1DBF73] search-btn hover:bg-[#00D749] duration-500 py-[15px] px-[70px] rounded search-btn text-white' /></Link>
+                        <Link
+                            onClick={handleApply}
+                        ><StyleButton title='Apply Now' className='bg-[#1DBF73] search-btn hover:bg-[#00D749] duration-500 py-[15px] px-[70px] rounded search-btn text-white' /></Link>
                         <IconButton sx={{
                             background: '#e3f8e2',
                             padding: '12px',
                             borderRadius: '10px',
                             marginLeft: '10px',
                             color: '#1DBF73',
-                            '&:hover': {color: '#fff', background: '#1DBF73', transition: '.3s'}
+                            '&:hover': { color: '#fff', background: '#1DBF73', transition: '.3s' }
                         }}>
                             <BsBookmarkPlus title='Save' />
                         </IconButton>
@@ -84,7 +99,7 @@ const JobDetails = () => {
 
                 </Card>
             </Box>
-        </Box>        
+        </Box>
     );
 };
 

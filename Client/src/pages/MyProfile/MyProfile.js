@@ -1,10 +1,16 @@
-import { Avatar, Box, FormHelperText, InputLabel, Stack, Typography } from '@mui/material';
+import { Avatar, Box, Stack, Typography } from '@mui/material';
 import React from 'react';
 import '../../App.css';
 import StyleButton from '../../Components/Button/StyleButton';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useGetUpdateUserQuery } from '../../features/auth/profileApi';
 
 const MyProfile = () => {
+    const user = useSelector((state) => state.auth.user);
+    const { data } = useGetUpdateUserQuery(user?.email);
+    const profile = useSelector((state) => state.profile)
+    console.log('profile image', profile.image)
     return (
         <Box sx={{
             width: '100%',
@@ -25,11 +31,11 @@ const MyProfile = () => {
                 }}>
                     <Avatar
                         alt="Remy Sharp"
-                        src="/static/images/avatar/1.jpg"
+                        src={profile?.image}
                         sx={{ width: 150, height: 150, margin: 'auto' }}
                     />
-                    <Typography variant='h5'>Abul Kana</Typography>
-                    <Typography variant=''>abul@gmail.com</Typography>
+                    <Typography variant='h5'>{data?.data?.name}</Typography>
+                    <Typography variant=''>{user?.email}</Typography>
                 </Box>
                 {/* ------ PROFILE FROM ------ */}
                 <Stack>
@@ -44,15 +50,15 @@ const MyProfile = () => {
                         }}>
                             <Stack spacing={1}>
                                 <label htmlFor='name' label='full-name'> Full Name <br />
-                                    <input className='input-box' />
+                                    <input value={data?.data?.name} readOnly className='input-box' />
                                 </label>
                                 <br />
                                 <label htmlFor='name' label='full-name'> Phone Number <br />
-                                    <input className='input-box' />
+                                    <input value={data?.data?.phone} readOnly className='input-box' />
                                 </label>
                                 <br />
                                 <label htmlFor='name' label='full-name'> Website <br />
-                                    <input className='input-box' />
+                                    <input value={data?.data?.website} readOnly className='input-box' />
                                 </label>
                             </Stack>
                         </Box>
@@ -63,15 +69,15 @@ const MyProfile = () => {
                         }}>
                             <Stack spacing={1}>
                                 <label htmlFor='name' label='full-name'> Job Title <br />
-                                    <input className='input-box' />
+                                    <input value={data?.data?.job_title} readOnly className='input-box' />
                                 </label>
                                 <br />
                                 <label htmlFor='name' label='full-name'> Languages <br />
-                                    <input className='input-box' />
+                                    <input value={data?.data?.language} readOnly className='input-box' />
                                 </label>
                                 <br />
                                 <label htmlFor='name' label='full-name'>  Age <br />
-                                    <input className='input-box' />
+                                    <input value={data?.data?.age} readOnly className='input-box' />
                                 </label>
                             </Stack>
                         </Box>
@@ -80,11 +86,11 @@ const MyProfile = () => {
 
                     <Box sx={{ width: '100%' }}>
                         <Typography variant='body1'>Description</Typography>
-                        <textarea className='w-full input-box' rows="10" placeholder='text area' />
+                        <textarea value={data?.data?.description} readOnly className='w-full input-box' rows="10" placeholder='text area' />
                     </Box>
                 </Stack>
-                <Box sx={{padding: '20px 0'}}>
-                    <Link>
+                <Box sx={{ padding: '20px 0' }}>
+                    <Link to='/dashboard/edit-profile'>
                         <StyleButton title='Edit Profile' className='bg-[#1DBF73] search-btn hover:bg-[#00D749] duration-500 py-[15px] px-[34px] rounded search-btn text-white' />
                     </Link>
                 </Box>

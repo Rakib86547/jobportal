@@ -88,7 +88,14 @@ const Signup = ({ handleClose, handleClickOpen, setOpen }) => {
                 email: data.email,
                 password: data.password,
                 role: value,
-                name: data.name
+                name: data.name,
+                image: '',
+                job_title: '',
+                phone: '',
+                language: '',
+                website: '',
+                age: '',
+                description: ''
             }
             dispatch(createUser({ email: data.email, password: data.password }));
             setTimeout(() => {

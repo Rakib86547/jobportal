@@ -9,13 +9,15 @@ import { getUser } from './features/auth/authSlice';
 import auth from './firebase/firebase.config';
 import router from './routes/route/router';
 import theme from './theme/theme';
+import { userEmail } from './features/auth/profileSlice';
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {        
-        dispatch(getUser(user?.email))           
+        dispatch(getUser(user?.email))
+        dispatch(userEmail(user?.email))        
       }
     })
   }, [])

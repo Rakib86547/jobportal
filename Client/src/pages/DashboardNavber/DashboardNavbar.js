@@ -25,9 +25,11 @@ import { Avatar } from '@mui/material';
 const DashboardNavbar = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-    const value = useSelector((state) => state.open.value)    
+    const value = useSelector((state) => state.open.value)
+    const profile = useSelector((state) => state.profile)
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+    const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch()
 
     const handleProfileMenuOpen = (event) => {
@@ -163,7 +165,7 @@ const DashboardNavbar = () => {
                                 onClick={handleProfileMenuOpen}
                                 color="inherit"
                             >
-                                <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+                                <Avatar alt="Travis Howard" src={profile?.image} />
                                 {/* <AccountCircle /> */}
                             </IconButton>
                         </Box>
