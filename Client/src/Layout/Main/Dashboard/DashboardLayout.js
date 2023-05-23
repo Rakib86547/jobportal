@@ -60,7 +60,7 @@ const DashboardLayout = () => {
                     padding: '10px 20px',
                     marginTop: '65px',
                     marginRight: '-33px',
-                    height: '100vh'
+                    // height: '100vh'
                 }}><Outlet /></Box>
             </Box>
         </div>

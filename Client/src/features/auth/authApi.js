@@ -18,17 +18,6 @@ const authApi = apiSlice.injectEndpoints({
                 url: `/jobs/job-details/${id}`,
             })
         }),
-        // updateProfile: builder.mutation({
-        //     query: (email, updateInfo) => ({
-        //         url: `/profile/${email}`,
-        //         method: 'PUT',
-        //         headers: {
-        //             'content-type': 'application/json',
-        //             authorization: `Bearer ${localStorage.getItem('userToken')}`
-        //         },
-        //         body: JSON.stringify(updateInfo)
-        //     })
-        // })
     })
 })
 
