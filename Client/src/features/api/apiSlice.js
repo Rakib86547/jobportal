@@ -11,7 +11,7 @@ const apiSlice = createApi({
         }
         return headers;
     },
-    tagTypes: ["Profile"],
+    tagTypes: ["Profile, Question, Ripley"],
     endpoints: (builder) => ({})
 })
 export default apiSlice;

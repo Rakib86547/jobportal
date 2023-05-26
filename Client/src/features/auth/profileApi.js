@@ -8,7 +8,7 @@ const profileAuth = apiSlice.injectEndpoints({
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json',
-                    authorization: `Bearer ${localStorage.getItem('userToken')}`
+                    'authorization': `Bearer ${localStorage.getItem('userToken')}`
                 },
                 body: data,
             }),
@@ -20,7 +20,7 @@ const profileAuth = apiSlice.injectEndpoints({
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',
-                    authorization: `Bearer ${localStorage.getItem('userToken')}`
+                    'authorization': `Bearer ${localStorage.getItem('userToken')}`
                 }
             }),
             providesTags: ["Profile"]

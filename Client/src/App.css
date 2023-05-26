@@ -173,3 +173,20 @@
 .box{
     display: flex !important;
 }
+
+/* ----- general q & a --------- */
+.question-input {
+    border: 1px solid #e3f8e2;
+    width: 40%;
+    padding: 10px 15px;
+    border-radius: 30px;
+}
+.question-input:focus-visible{
+    outline: 1px solid #1DBF73;
+}
+
+@media screen and (max-width: 900px) {
+    .question-input{
+        width: 100%
+    }
+}

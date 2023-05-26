@@ -8,7 +8,7 @@ const jobAuth = apiSlice.injectEndpoints({
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json',
-                    authorization: `Bearer ${localStorage.getItem('userToken')}`
+                    'authorization': `Bearer ${localStorage.getItem('userToken')}`
                 },
                 body: applyData
             })
@@ -22,8 +22,54 @@ const jobAuth = apiSlice.injectEndpoints({
                     authorization: `Bearer ${localStorage.getItem('userToken')}`
                 }
             })
+        }),
+        questions: builder.mutation({
+            query: (questionData) => ({
+                url: '/jobs/questions',
+                method: "PATCH",
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('userToken')}`
+                },
+                body: questionData
+            }),
+            invalidatesTags: ["Question"]
+        }),
+        ripley: builder.mutation({
+            query: (ripleyData) => ({
+                url: '/jobs/ripley',
+                method: "PATCH",
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('userToken')}`
+                },
+                body: ripleyData
+            }),
+            invalidatesTags: ["Ripley"]
+        }),
+        getQuestions: builder.query({
+            query: (id) => ({
+                url: `/jobs/questions/${id}`,
+                method: "GET",
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('userToken')}`
+                }
+            }),
+            providesTags: ["Question"]
+        }),
+        getRipley: builder.query({
+            query: (id) => ({
+                url: `/jobs/ripley/${id}`,
+                method: "GET",
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('userToken')}`
+                }
+            }),
+            providesTags: ["Ripley"]
         })
     })
 });
 
-export const { useApplyMutation, useGetAppliedJobsQuery } = jobAuth;
+export const { useApplyMutation, useGetAppliedJobsQuery, useQuestionsMutation, useGetRipleyQuery, useGetQuestionsQuery, useRipleyMutation } = jobAuth;

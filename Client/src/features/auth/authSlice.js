@@ -86,7 +86,6 @@ export const saveUsersInDB = createAsyncThunk('auth/saveUsersInDB', async (userI
 export const getUser = createAsyncThunk('auth/getUser', async (email) => {
     const res = await fetch(`${process.env.REACT_APP_URL}/user/${email}`)
     const data = await res.json()
-    console.log('get user: ', data)
     return data.data;
 
 })
