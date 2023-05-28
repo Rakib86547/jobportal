@@ -232,7 +232,7 @@ const JobDetails = () => {
                                 <CalendarTodayOutlinedIcon sx={{ marginTop: '8px', color: '#1DBF73' }} />
                                 <Box sx={{ marginLeft: '15px' }}>
                                     <Typography>Date Posted:</Typography>
-                                    <Typography>{jobData?.data?.updatedAt.slice(0, 10)}</Typography>
+                                    {/* <Typography>{jobData?.data?.updatedAt.slice(0, 10)}</Typography> */}
                                 </Box>
                             </Box>
                         </Box>

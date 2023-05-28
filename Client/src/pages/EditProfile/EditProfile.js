@@ -19,8 +19,6 @@ const EditProfile = () => {
     const [image, setImage] = useState({})
     const dispatch = useDispatch();
     const navigate = useNavigate()
-
-
     // console.log('new update data',updateData)
     // const updateData = {
     //     data,

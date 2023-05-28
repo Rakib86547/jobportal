@@ -54,7 +54,7 @@ const DashboardLayout = () => {
                 <Box
                 className='outlet'
                  sx={{
-                    background: '#f3f4f6', 
+                    background: '#e3f8e2', 
                     flex: 1,
                     marginLeft: '225px',
                     padding: '10px 20px',

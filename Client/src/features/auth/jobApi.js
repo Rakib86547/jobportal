@@ -23,6 +23,28 @@ const jobAuth = apiSlice.injectEndpoints({
                 }
             })
         }),
+        getQuestions: builder.query({
+            query: (id) => ({
+                url: `/jobs/questions/${id}`,
+                method: "GET",
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('userToken')}`
+                }
+            }),
+            providesTags: ["Question"]
+        }),
+        getRipley: builder.query({
+            query: (id) => ({
+                url: `/jobs/ripley/${id}`,
+                method: "GET",
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('userToken')}`
+                }
+            }),
+            providesTags: ["Question"]
+        }),
         questions: builder.mutation({
             query: (questionData) => ({
                 url: '/jobs/questions',
@@ -45,30 +67,8 @@ const jobAuth = apiSlice.injectEndpoints({
                 },
                 body: ripleyData
             }),
-            invalidatesTags: ["Ripley"]
+            invalidatesTags: ["Question"]
         }),
-        getQuestions: builder.query({
-            query: (id) => ({
-                url: `/jobs/questions/${id}`,
-                method: "GET",
-                headers: {
-                    'content-type': 'application/json',
-                    'authorization': `Bearer ${localStorage.getItem('userToken')}`
-                }
-            }),
-            providesTags: ["Question"]
-        }),
-        getRipley: builder.query({
-            query: (id) => ({
-                url: `/jobs/ripley/${id}`,
-                method: "GET",
-                headers: {
-                    'content-type': 'application/json',
-                    'authorization': `Bearer ${localStorage.getItem('userToken')}`
-                }
-            }),
-            providesTags: ["Ripley"]
-        })
     })
 });
 
