@@ -19,6 +19,8 @@ import AllApplicants from "../../pages/AllApplicants/AllApplicants";
 import DashboardLayout from "../../Layout/Main/Dashboard/DashboardLayout";
 import Welcome from "../../pages/Welcome/Welcome";
 import EditProfile from "../../pages/EditProfile/EditProfile";
+import EditPersonalInformation from "../../pages/Personal/EditPersonalInformation";
+
 
 
 const router = createBrowserRouter([{
@@ -105,8 +107,12 @@ const router = createBrowserRouter([{
         {
             path: '/dashboard/edit-profile',
             element: <EditProfile />
-        }
+        },     
+        {
+            path: '/dashboard/edit-personal',
+            element: <EditPersonalInformation />
+        },     
     ]
-},
+}
 ]);
 export default router;

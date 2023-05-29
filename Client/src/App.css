@@ -193,3 +193,57 @@
 .css-1g9f98u-MuiButtonBase-root-MuiIconButton-root:hover{
     background-color: transparent !important;
   }
+
+  /* ------------- profile tabs ----------- */
+.css-1kgxurd-MuiTabs-indicator{
+    background: transparent !important;
+}
+.css-18p83na-MuiButtonBase-root-MuiTab-root{
+    color: #202124 !important;
+}
+.css-18p83na-MuiButtonBase-root-MuiTab-root:active{
+    color: #1DBF73 !important;
+    background: transparent !important;
+}
+.css-18p83na-MuiButtonBase-root-MuiTab-root.Mui-selected{
+    color:#1DBF73 !important
+}
+.css-18p83na-MuiButtonBase-root-MuiTab-root{
+    text-transform: capitalize !important;
+    font-size: 16px !important;
+}
+.css-78trlr-MuiButtonBase-root-MuiIconButton-root:hover{
+    background: transparent !important;
+}
+.css-78trlr-MuiButtonBase-root-MuiIconButton-root{
+    color:#1DBF73 !important
+}
+
+/* ----- edit pesonal info --------- */
+.react-tel-input .selected-flag {
+    outline: none !important;
+    position: relative !important;
+    width: 38px !important;
+    height: 100% !important;
+    padding: 0 0 0 8px !important;
+    border-radius: 3px 0 0 3px !important;
+}
+.react-tel-input .form-control {
+    position: relative !important;
+    font-size: 14px !important;
+    letter-spacing: .01rem !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-left: 48px !important;
+    border-radius: 5px !important;
+    line-height: 25px !important;
+    height: 35px !important;
+    width: 100% !important;
+    outline: none !important;
+    background: #e3f8e2 !important;
+}
+/* .react-tel-input .form-control:focus-visible {
+    outline: 1px solid #1DBF73;
+    background: #fff;
+    transition: all .3s;
+} */

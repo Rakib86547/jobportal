@@ -14,17 +14,10 @@ import '../../App.css';
 const EditProfile = () => {
     const data = useSelector((state) => state.profile);
     const profile = useSelector((state) => state.profile)
-    // console.log('profile image', profile.image)
     const [updateProfile, { isSuccess, isLoading }] = useUpdateProfileMutation();
     const [image, setImage] = useState({})
     const dispatch = useDispatch();
     const navigate = useNavigate()
-    // console.log('new update data',updateData)
-    // const updateData = {
-    //     data,
-    //     img: profile?.image
-    // }
-
     if (isSuccess) {
         toast.success('Update is Success');
         navigate('/dashboard/profile')
@@ -48,7 +41,7 @@ const EditProfile = () => {
             })
     }
     return (
-        <div>
+        <Box>
             <Typography variant='h4' textAlign={'center'} padding={'20px 10px'}>Edit Profile!</Typography>
             <Stack sx={{
                 boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
@@ -144,7 +137,7 @@ const EditProfile = () => {
                     </Link>
                 </Box>
             </Stack>
-        </div>
+        </Box>
     );
 };
 

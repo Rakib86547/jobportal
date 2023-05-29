@@ -3,6 +3,7 @@ import apiSlice from "../features/api/apiSlice";
 import authSlice from "../features/auth/authSlice";
 import openSlice from "../features/auth/openSlice";
 import profileSlice from "../features/auth/profileSlice";
+import personalInfoSlice from "../features/auth/personalInfoSlice";
 
 
 const store = configureStore({
@@ -10,7 +11,8 @@ const store = configureStore({
         [apiSlice.reducerPath]: apiSlice.reducer,
         auth: authSlice,
         open: openSlice,
-        profile: profileSlice
+        profile: profileSlice,
+        personal: personalInfoSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
 });
