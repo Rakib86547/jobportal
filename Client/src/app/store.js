@@ -4,6 +4,8 @@ import authSlice from "../features/auth/authSlice";
 import openSlice from "../features/auth/openSlice";
 import profileSlice from "../features/auth/profileSlice";
 import personalInfoSlice from "../features/auth/personalInfoSlice";
+import educationSlice from "../features/auth/educationSlice";
+import workSlice from "../features/auth/workSlice";
 
 
 const store = configureStore({
@@ -12,7 +14,9 @@ const store = configureStore({
         auth: authSlice,
         open: openSlice,
         profile: profileSlice,
-        personal: personalInfoSlice
+        personal: personalInfoSlice,
+        education: educationSlice,
+        work: workSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
 });

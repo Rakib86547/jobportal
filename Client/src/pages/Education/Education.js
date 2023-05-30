@@ -1,40 +1,40 @@
 import { Box, Typography } from '@mui/material';
-import React from 'react';
+import React, { } from 'react';
 import { Link } from 'react-router-dom';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
-import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import EducationalModal from './EducationalModal';
+import { useGetEducationQuery } from '../../features/auth/educationalApi';
+import { useSelector } from 'react-redux';
+import EducationDetails from './EducationDetails';
 
 const Education = () => {
+    const [open, setOpen] = React.useState(false);
+    const user = useSelector((state) => state.auth.user);
+    const email = user?.email
+    const { data } = useGetEducationQuery(email)
+
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => { setOpen(false) };
+
     return (
         <Box>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Typography variant='h6'>Education</Typography>
-                <Link>
+                <Link
+                    onClick={handleOpen}
+                >
                     <span><AddCircleOutlinedIcon className='text-[#e3f8e2]' /> Add Education</span>
                 </Link>
             </Box>
             <Box>
-                <Box sx={{padding: '20px 0px'}}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: '15px' }}>
-                        <Typography variant='h6' >Bachlors in Fine Arts</Typography>
-                        <Typography sx={{
-                            marginLeft: '15px',
-                            padding: '3px 20px',
-                            color: '#1DBF73',
-                            borderRadius: '30px',
-                            background: '#e3f8e2'
-                        }}>2012-2014</Typography>
-                        <Link ><span className='ml-[15px] text-[#1DBF73] rounded-[8px] px-[5px] py-[7px] bg-[#e3f8e2]'><BorderColorOutlinedIcon /></span></Link>
-                        <Link><span className='ml-[15px] text-red-400 rounded-[8px] px-[5px] py-[7px] bg-[#e3f8e2]'><DeleteOutlinedIcon /></span></Link>
-                    </Box>
-                    <Typography sx={{
-                        marginLeft: '15px',
-                        color: '#1DBF73'
-                    }}>Harvard University</Typography>
-                    <Typography sx={{ marginLeft: '15px' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante
-                        ipsum primis in faucibus.</Typography>
-                </Box>
+                {
+                    data?.data?.map(education => (<EducationDetails key={education._id} education={education} />))
+                }
+            </Box>
+            <Box>
+                {
+                    open && <EducationalModal open={open} handleClose={handleClose} setOpen={setOpen} />
+                }
             </Box>
         </Box>
     );

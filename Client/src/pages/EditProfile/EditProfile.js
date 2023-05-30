@@ -13,7 +13,7 @@ import '../../App.css';
 
 const EditProfile = () => {
     const data = useSelector((state) => state.profile);
-    const profile = useSelector((state) => state.profile)
+    // const profile = useSelector((state) => state.profile)
     const [updateProfile, { isSuccess, isLoading }] = useUpdateProfileMutation();
     const [image, setImage] = useState({})
     const dispatch = useDispatch();

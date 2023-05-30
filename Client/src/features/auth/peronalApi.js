@@ -11,7 +11,8 @@ const personalAuth = apiSlice.injectEndpoints({
                     'authorization': `Bearer ${localStorage.getItem('userToken')}`
                 },
                 body: data,
-            })
+            }),
+            invalidatesTags: ["Personal"]
         }),
         getPersonalInfo: builder.query({
             query: (email) => ({
@@ -21,7 +22,8 @@ const personalAuth = apiSlice.injectEndpoints({
                     'content-type': 'application/json',
                     'authorization': `Bearer ${localStorage.getItem('userToken')}`
                 }
-            })
+            }),
+            providesTags: ["Personal"]
         }),
     })
 });

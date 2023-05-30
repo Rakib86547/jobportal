@@ -1,9 +1,9 @@
 import { Box, Stack, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import StyleButton from '../../Components/Button/StyleButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { editCity, editCountry, editFirstName, editLastName, editPhone, editStreetAddress } from '../../features/auth/personalInfoSlice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
@@ -14,16 +14,12 @@ import { toast } from 'react-hot-toast'
 
 const EditPersonalInformation = () => {
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
     const personal = useSelector((state) => state.personal);
-
     const [postData, { isLoading, isSuccess }] = usePostPersonalInfoMutation();
-    console.log('info', postData.data)
 
-    if (isSuccess) {
-        toast.success('Update Success!')
-    }
 
     // --- handle personal information to database ------
     const handlePersonal = () => {
@@ -37,8 +33,16 @@ const EditPersonalInformation = () => {
             city: personal.city,
             street_address: personal.street_address,
         };
-        postData(data)
+        postData(data);
+
     }
+
+    useEffect(() => {
+        if (isSuccess) {
+            toast.success('Update Success!');
+            navigate('/dashboard/resume')
+        }
+    }, [isSuccess, postData])
 
 
     return (
@@ -123,7 +127,7 @@ const EditPersonalInformation = () => {
 
                 </Box>
 
-                <Box sx={{ padding: '20px 0', textAlign: 'center' }}>
+                <Box sx={{ padding: '20px 0', textAlign: 'center', display: 'inline-block' }}>
                     <Link
                         onClick={handlePersonal}
                     >
