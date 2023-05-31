@@ -22,6 +22,7 @@ const workSlice = createSlice({
     initialState,
     reducers: {
         jobTitle: (state, action) => {
+            console.log(action)
             state.addWork.job_title = action.payload
         },
         company: (state, action) => {
@@ -36,9 +37,9 @@ const workSlice = createSlice({
         description: (state, action) => {
             state.addWork.description = action.payload
         },
-        clearWork: (state, action) => {
-            state.addWork = ''
-        },
+        // clearWork: (state, action) => {
+        //     state.addWork = null
+        // },
 
         // ----- edit area ------
 
@@ -57,9 +58,9 @@ const workSlice = createSlice({
         editDescription: (state, action) => {
             state.editWork.description = action.payload
         },
-        clearEditWork: (state) => {
-            state.editWork = ''
-        }
+        // clearEditWork: (state) => {
+        //     state.editWork = ''
+        // }
     }
 });
 

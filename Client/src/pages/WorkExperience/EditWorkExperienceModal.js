@@ -8,7 +8,7 @@ import { clearEditWork, editCompany, editDescription, editEndDate, editJobTitle,
 import { useUpdateWorkMutation } from '../../features/auth/workApi';
 import { toast } from 'react-hot-toast';
 
-const EditWorkExperienceModal = ({ open, handleClose, id }) => {
+const EditWorkExperienceModal = ({ open, handleClose, id, work: workData }) => {
     const work = useSelector((state) => state.work.editWork);
     const [updateWork, { isLoading }] = useUpdateWorkMutation();
     const dispatch = useDispatch();
@@ -95,7 +95,7 @@ const EditWorkExperienceModal = ({ open, handleClose, id }) => {
                         <textarea
                             name='description'
                             onChange={(e) => dispatch(editDescription(e.target.value))}
-                            className='w-full input-box' rows="5" placeholder='Write you Degree.....' />
+                            className='w-full input-box' rows="5" placeholder='Write About your Job.....' />
                     </Box>
                 </DialogContent>
                 <DialogActions

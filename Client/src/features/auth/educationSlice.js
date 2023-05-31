@@ -36,9 +36,9 @@ export const educationSlice = createSlice({
         description: (state, action) => {
             state.educations.description = action.payload
         },
-        clearEducation: (state) => {
-            state.educations = ''
-        },
+        // clearEducation: (state) => {
+        //     state.educations = ''
+        // },
 
         editDegreeName: (state, action) => {
             state.editEducation.edit_degree_name = action.payload

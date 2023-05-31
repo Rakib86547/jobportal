@@ -11,7 +11,6 @@ const WorkExperience = () => {
     const [open, setOpen] = useState(false);
     const user = useSelector((state) => state.auth.user)
     const { data } = useGetWorkQuery(user?.email);
-    console.log('data', data)
     const handleOpen = () => setOpen(true);
     const handleClose = () => { setOpen(false) };
     return (

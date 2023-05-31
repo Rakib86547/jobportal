@@ -170,7 +170,8 @@
     border-radius: 8px;
     padding: 15px
 }
-.box{
+
+.box {
     display: flex !important;
 }
 
@@ -181,42 +182,50 @@
     padding: 10px 15px;
     border-radius: 30px;
 }
-.question-input:focus-visible{
+
+.question-input:focus-visible {
     outline: 1px solid #1DBF73;
 }
 
 @media screen and (max-width: 900px) {
-    .question-input{
+    .question-input {
         width: 100%
     }
 }
-.css-1g9f98u-MuiButtonBase-root-MuiIconButton-root:hover{
-    background-color: transparent !important;
-  }
 
-  /* ------------- profile tabs ----------- */
-.css-1kgxurd-MuiTabs-indicator{
+.css-1g9f98u-MuiButtonBase-root-MuiIconButton-root:hover {
+    background-color: transparent !important;
+}
+
+/* ------------- profile tabs ----------- */
+.css-1kgxurd-MuiTabs-indicator {
     background: transparent !important;
 }
-.css-18p83na-MuiButtonBase-root-MuiTab-root{
+
+.css-18p83na-MuiButtonBase-root-MuiTab-root {
     color: #202124 !important;
 }
-.css-18p83na-MuiButtonBase-root-MuiTab-root:active{
+
+.css-18p83na-MuiButtonBase-root-MuiTab-root:active {
     color: #1DBF73 !important;
     background: transparent !important;
 }
-.css-18p83na-MuiButtonBase-root-MuiTab-root.Mui-selected{
-    color:#1DBF73 !important
+
+.css-18p83na-MuiButtonBase-root-MuiTab-root.Mui-selected {
+    color: #1DBF73 !important
 }
-.css-18p83na-MuiButtonBase-root-MuiTab-root{
+
+.css-18p83na-MuiButtonBase-root-MuiTab-root {
     text-transform: capitalize !important;
     font-size: 16px !important;
 }
-.css-78trlr-MuiButtonBase-root-MuiIconButton-root:hover{
+
+.css-78trlr-MuiButtonBase-root-MuiIconButton-root:hover {
     background: transparent !important;
 }
-.css-78trlr-MuiButtonBase-root-MuiIconButton-root{
-    color:#1DBF73 !important
+
+.css-78trlr-MuiButtonBase-root-MuiIconButton-root {
+    color: #1DBF73 !important
 }
 
 /* ----- edit pesonal info --------- */
@@ -230,6 +239,7 @@
     border: none !important;
     background: transparent !important;
 }
+
 .react-tel-input .form-control {
     position: relative !important;
     font-size: 14px !important;
@@ -247,9 +257,27 @@
 }
 
 /* ---------- education modal --------- */
-.css-1t1j96h-MuiPaper-root-MuiDialog-paper{
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
     max-width: 650px !important;
 }
+
 .css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop {
     background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* --- skill  */
+input.control-input {
+    border: 1px solid #e3f8e2;
+    padding: 8px 19px;
+    border-radius: 21px;
+    margin-right: 20px;
+    background: #e3f8e2;
+    width: 30%;
+    max-width: 100%;
+}
+input.control-input:focus-visible {
+    /* outline: none; */
+    outline: 1px solid #1DBF73;
+    background: #fff;
+    transition: all .3s;
 }

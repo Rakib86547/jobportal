@@ -3,7 +3,7 @@ import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import React from 'react';
 import StyleButton from '../../Components/Button/StyleButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearWork, company, description, endDate, jobTitle, startDate } from '../../features/auth/workSlice';
+import { company, description, endDate, jobTitle, startDate } from '../../features/auth/workSlice';
 import { usePostWorkMutation } from '../../features/auth/workApi';
 import { toast } from 'react-hot-toast';
 import Spinner from '../../Components/Spinner/Spinner';
@@ -27,7 +27,7 @@ const AddExperienceModal = ({ open, handleClose }) => {
     };
     if(isSuccess){
         toast.success('Your Work Experience is Added');
-        dispatch(clearWork())
+        // dispatch(clearWork())
     }
     return (
         <Box>

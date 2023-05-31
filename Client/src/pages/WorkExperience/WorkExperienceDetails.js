@@ -40,7 +40,7 @@ const WorkExperienceDetails = ({ work }) => {
                 <Typography sx={{ marginLeft: '15px' }}>{description}</Typography>
             </Box>
             {
-                workModalOpen && <EditWorkExperienceModal open={workModalOpen} handleClose={handleClose} id={id} />
+                workModalOpen && <EditWorkExperienceModal open={workModalOpen} handleClose={handleClose} id={id} work={work} />
             }
         </Box>
     );
