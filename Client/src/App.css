@@ -155,6 +155,20 @@
     border-radius: 8px;
     transition: all .3s;
 }
+.input-box-box{
+    width: 100%;
+    padding: 15px 8px;
+    border: 1px dashed #1DBF73;
+    border-radius: 8px;
+    transition: all .3s;
+}
+.input-box-box:focus-visible{
+    outline: none;
+    width: 100%;
+    padding: 15px 8px;
+    border-radius: 8px;
+    transition: all .3s;
+}
 
 .input-box:focus-visible {
     /* outline: none; */
@@ -275,9 +289,44 @@ input.control-input {
     width: 30%;
     max-width: 100%;
 }
+input.control-input-input{
+    border: 1px solid #e3f8e2;
+    padding: 14px 19px;
+    border-radius: 8px;
+    margin-right: 20px;
+    background: #e3f8e2;
+    width: 50%;
+}
+
+@media screen and (max-width: 900px) {
+    .control-input-input{
+        width: 90% !important
+    }
+}
+@media screen and (max-width: 600px) {
+    .control-input-input{
+        width: 75% !important
+    }
+}
+.control-input-input:focus-visible {
+    outline: 1px solid #1DBF73;
+    background: #fff;
+    transition: all .3s;
+}
+
 input.control-input:focus-visible {
     /* outline: none; */
     outline: 1px solid #1DBF73;
     background: #fff;
     transition: all .3s;
+}
+
+.label {
+    width: 50%
+}
+
+@media screen and (max-width: 900px) {
+    .label {
+        width: 100%
+    }
 }

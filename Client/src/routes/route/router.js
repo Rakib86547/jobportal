@@ -20,6 +20,8 @@ import DashboardLayout from "../../Layout/Main/Dashboard/DashboardLayout";
 import Welcome from "../../pages/Welcome/Welcome";
 import EditProfile from "../../pages/EditProfile/EditProfile";
 import EditPersonalInformation from "../../pages/Personal/EditPersonalInformation";
+import PrivetRoute from "../PrivetRoute/PrivetRoute";
+import EditCompanyProfile from "../../pages/CompanyProfile/EditCompanyProfile";
 
 
 
@@ -102,16 +104,20 @@ const router = createBrowserRouter([{
         },
         {
             path: '/dashboard/profile',
-            element: <MyProfile />
+            element: <PrivetRoute><MyProfile /></PrivetRoute>
         },
         {
             path: '/dashboard/edit-profile',
             element: <EditProfile />
-        },     
+        },
         {
             path: '/dashboard/edit-personal',
-            element: <EditPersonalInformation />
-        },     
+            element: <PrivetRoute ><EditPersonalInformation /></PrivetRoute>
+        },
+        {
+            path: '/dashboard/edit-company-information',
+            element: <PrivetRoute ><EditCompanyProfile /></PrivetRoute>
+        },
     ]
 }
 ]);
