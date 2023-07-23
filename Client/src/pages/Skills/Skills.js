@@ -15,6 +15,11 @@ const Skills = () => {
         control,
         name: "skills"
     });
+
+    const handleSkill = (data) => {
+        console.log('data', data)
+        data.skills.map(i => console.log(i.value))
+    }
     return (
         <Box>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -36,11 +41,11 @@ const Skills = () => {
                 </Typography>
             </Box> */}
 
-            <form onSubmit={handleSubmit(data => console.log(data))}>
+            <form onSubmit={handleSubmit(handleSkill)}>
                 <ul>
                     {fields.map((item, index) => (
                         <li key={item.id}>
-                            <input className='control-input mb-5' {...register(`skills.${index}.value`, { required: 'Field is required' })} />
+                            <input name='skills' className='control-input mb-5' {...register(`skills.${index}.value`, { required: 'Field is required' })} />
                             <button 
                             className='border border-[#e3f8e2] rounded-full p-[5px] bg-red-400' 
                             type="button" 
@@ -55,6 +60,7 @@ const Skills = () => {
                 >
                     <span><AddCircleOutlinedIcon className='text-[#e3f8e2]' /> Add Skills</span>
                 </button>
+                <button type='submit'> add</button>
             </form>
         </Box>
     );

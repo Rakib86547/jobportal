@@ -6,34 +6,68 @@ import { useForm, useFieldArray, } from "react-hook-form";
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import '../../App.css'
 import StyleButton from '../../Components/Button/StyleButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { useGetCompanyProfileInfoQuery } from '../../features/auth/companyProfileApi';
+import { applicationDeadline, experience, jobDescription, jobSkills, jobTitle, jobType, job_description, keyResponsibilities, location, position, salary, skillExperience } from '../../features/auth/jobSlice';
 
 const PostJob = () => {
-    const { register, control, handleSubmit, reset, trigger, setError, formState: { errors } } = useForm({
-        // defaultValues: {}; you can populate the fields by this attribute 
-    });
-    const { 
-        fields: responsibilitiesFields, 
-        append: responsibilitiesAppend, 
+    const { register, control, handleSubmit, reset, trigger, setError, watch, formState: { errors } } = useForm({});
+    const user = useSelector((state) => state.auth.user);
+    const email = user?.email
+    const { data: companyInfo } = useGetCompanyProfileInfoQuery(email, { refetchOnMountOrArgChange: true });
+    const dispatch = useDispatch();
+    const jobs = useSelector((state) => state.job)
+    // console.log('job>> ', jobs)
+    const {
+        fields: responsibilitiesFields,
+        append: responsibilitiesAppend,
         remove: responsibilitiesRemove
-     } = useFieldArray({
+    } = useFieldArray({
         control,
         name: "responsibilities"
     });
-    const { 
-       fields: skillExperienceFields, 
-       append: skillExperienceAppend, 
-       remove: skillExperienceRemove } = useFieldArray({
-        control,
-        name: "experience"
-    });
-    const { 
-       fields: technologyFields, 
-       append: technologyAppend, 
-       remove: technologyRemove } = useFieldArray({
-        control,
-        name: "technology"
-    });
-  
+    const {
+        fields: skillExperienceFields,
+        append: skillExperienceAppend,
+        remove: skillExperienceRemove } = useFieldArray({
+            control,
+            name: "experience"
+        });
+    const {
+        fields: technologyFields,
+        append: technologyAppend,
+        remove: technologyRemove } = useFieldArray({
+            control,
+            name: "technology"
+        });
+
+    // handle job post-------
+    const handleJobPost = (data) => {
+       const exp = data?.experience?.map(ex => dispatch(skillExperience(ex.value)));
+        data?.responsibilities?.map(res => dispatch(keyResponsibilities(res.value)));
+        data?.technology?.map(tech => dispatch(jobSkills(tech.value)));
+        console.log(exp)
+        const jobsData = {
+            job_title: jobs?.job_title,
+            img: jobs?.img,
+            location: jobs?.location,
+            experience: jobs?.experience,
+            salary: jobs?.salary,
+            position: jobs?.position,
+            job_description: jobs?.job_description,
+            key_responsibilities: jobs?.key_responsibilities,
+            skill_experience: jobs?.skill_experience,
+            job_skills: jobs?.job_skills,
+            application_deadline: jobs?.application_deadline,
+            job_type: jobs?.job_type,
+            applicants: jobs?.applicants,
+            queries: jobs?.queries,
+            replies: jobs?.replies
+        };
+
+        console.log(jobsData)
+    }
+
     return (
         <Box sx={{
             boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
@@ -42,23 +76,23 @@ const PostJob = () => {
             padding: '15px'
         }}>
             <Typography variant='h4' sx={{ textAlign: 'center', paddingBottom: '15px' }}>Post A New Job!</Typography>
-            <form>
+            <form onSubmit={handleSubmit(handleJobPost)}>
                 <Stack spacing={3}>
 
                     <Box>
-                        <label htmlFor='name' label='est-since'> Job Title
+                        <label htmlFor='name' label='title'> Job Title
                             <input
                                 // value={company?.est_since}
                                 type='text'
                                 placeholder='Title'
                                 name='est-since'
-                                // onChange={(e) => dispatch(estSince(e.target.value))}
+                                onChange={(e) => dispatch(position(e.target.value))}
                                 className='input-box' />
                         </label>
 
                         <Box sx={{ width: '100%', marginTop: '30px' }}>
                             <Typography variant='body' sx={{ marginBottom: '10px' }}>Job Description</Typography>
-                            <textarea placeholder='Write about your Job' className='w-full input-box' rows="10" />
+                            <textarea onChange={(e) => dispatch(jobDescription(e.target.value))} placeholder='Write about your Job' className='w-full input-box' rows="10" />
                         </Box>
                     </Box>
 
@@ -77,13 +111,14 @@ const PostJob = () => {
                         display: 'flex',
                         flexDirection: { xs: 'column', md: 'row' }
                     }}>
-                        <label htmlFor='name' label='full-name' className='label'> Category
+                        <label htmlFor='name' label='category' className='label'> Category
                             <select
                                 className='input-box'
                                 // value={company?.company_type}
-                                // onChange={(e) => dispatch(companyType(e.target.value))}
-                                name='company-type'
+                                onChange={(e) => dispatch(jobTitle(e.target.value))}
+                                name='category'
                             >
+                                <option>Select Category</option>
                                 <option value='Design'>Design</option>
                                 <option value='Resource'>Resource</option>
                                 <option value='Finance'>Finance</option>
@@ -95,13 +130,14 @@ const PostJob = () => {
                             </select>
                         </label>
 
-                        <label htmlFor='name' label='full-name' className='label'> Salary Per Month
+                        <label htmlFor='name' label='salary' className='label'> Salary Per Month
                             <select
                                 className='input-box'
                                 // value={company?.company_type}
-                                // onChange={(e) => dispatch(companyType(e.target.value))}
-                                name='company-type'
+                                onChange={(e) => dispatch(salary(e.target.value))}
+                                name='salary'
                             >
+                                <option>Select Salary</option>
                                 <option value='$250'>$250</option>
                                 <option value='$300'>$300</option>
                                 <option value='$400'>$400</option>
@@ -116,19 +152,19 @@ const PostJob = () => {
                         display: 'flex',
                         flexDirection: { xs: 'column', md: 'row' }
                     }}>
-                        <label htmlFor='name' label='est-since' className='label'> Application Deadline
+                        <label htmlFor='name' label='application-deadline' className='label'> Application Deadline
                             <input
                                 // value={company?.est_since}
                                 type='date'
-                                name='est-since'
-                                // onChange={(e) => dispatch(estSince(e.target.value))}
+                                name='application-deadline'
+                                onChange={(e) => dispatch(applicationDeadline(e.target.value))}
                                 className='input-box' />
                         </label>
 
-                        <label htmlFor='name' label='country' className='label'> Location
+                        <label htmlFor='name' label='location' className='label'> Location
                             <CountryDropdown
-                                // value={company?.country}
-                                // onChange={(e) => dispatch(country(e))}
+                                value={jobs?.location}
+                                onChange={(e) => dispatch(location(e))}
                                 className='input-box'
                             />
                         </label>
@@ -138,34 +174,41 @@ const PostJob = () => {
                         display: 'flex',
                         flexDirection: { xs: 'column', md: 'row' }
                     }}>
-                        <label htmlFor='name' label='complete-address' className='label'> Experience
+                        <label htmlFor='name' label='experience' className='label'> Experience
                             <select
                                 className='input-box'
                                 // value={company?.company_type}
-                                // onChange={(e) => dispatch(companyType(e.target.value))}
-                                name='company-type'
+                                onChange={(e) => dispatch(experience(e.target.value))}
+                                name='experience'
                             >
-                                <option>Fresher</option>
+                                <option>Select Experience</option>
+                                <option value='Fresher'>Fresher</option>
                                 <option value='Banking'>Mid Level Experience</option>
                                 <option value='digital & Creative'>Experienced</option>
                             </select>
                         </label>
 
-                        <label htmlFor='name' label='complete-address' className='label'> Apply Deadline
-                            <input
-                                // value={company?.address}
-                                name='complete-address'
-                                // onChange={(e) => dispatch(completeAddress(e.target.value))}
-                                className='input-box' />
+                        <label htmlFor='name' label='job-type' className='label'> Job Type
+                            <select
+                                className='input-box'
+                                // value={company?.company_type}
+                                onChange={(e) => dispatch(jobType(e.target.value))}
+                                name='job-type'
+                            >
+                                <option>Select Job Type</option>
+                                <option value='Full Time'>Full Time</option>
+                                <option value='Part Time'>Part Time</option>
+                                <option value='Hourly'>Hourly</option>
+                            </select>
                         </label>
                     </Stack>
 
                     <Box>
-                        <label htmlFor='name' label='est-since'> Responsibilities
+                        <label htmlFor='name' label='responsibilities'> Responsibilities
                             <ul>
                                 {responsibilitiesFields.map((item, index) => (
                                     <li key={item.id}>
-                                        <input placeholder='responsibilities' className='control-input-input mb-5' {...register(`responsibilities.${index}.value`, { required: 'Field is required' })} />
+                                        <input onChange={(e) => dispatch(keyResponsibilities(e.target.value))} placeholder='responsibilities' className='control-input-input mb-5' {...register(`responsibilities.${index}.value`, { required: 'Field is required' })} />
                                         <button
                                             className='border border-[#e3f8e2] rounded-full p-[5px] bg-red-400'
                                             type="button"
@@ -180,9 +223,11 @@ const PostJob = () => {
                             >
                                 <span><AddCircleOutlinedIcon className='text-[#e3f8e2]' /> Add Responsibilities</span>
                             </button>
+
                         </label>
-<br /> <br />
-                        <label htmlFor='name' label='est-since'> Skill & Experience
+                        <br /> <br />
+
+                        <label htmlFor='name' label='skill_experience'> Skill & Experience
                             <ul>
                                 {skillExperienceFields.map((item, index) => (
                                     <li key={item.id}>
@@ -202,12 +247,17 @@ const PostJob = () => {
                                 <span><AddCircleOutlinedIcon className='text-[#e3f8e2]' /> Add Skill & Experience</span>
                             </button>
                         </label>
-<br /> <br />
-                        <label htmlFor='name' label='est-since'> Technology Skills
+
+
+                        <br /> <br />
+                        <label htmlFor='name' label='technology_skills'> Technology Skills
                             <ul>
                                 {technologyFields.map((item, index) => (
                                     <li key={item.id}>
-                                        <input placeholder='technology skill' className='control-input-input mb-5' {...register(`experience.${index}.value`, { required: 'Field is required' })} />
+                                        <input
+                                            name='technology'
+                                            placeholder='technology skill' className='control-input-input mb-5'
+                                            {...register(`technology.${index}.value`, { required: 'Field is required' })} />
                                         <button
                                             className='border border-[#e3f8e2] rounded-full p-[5px] bg-red-400'
                                             type="button"
@@ -218,7 +268,7 @@ const PostJob = () => {
                             <button
                                 className='add-button border rounded-full p-[5px] px-4 mt-1'
                                 type="button"
-                                onClick={() => technologyAppend({ experience: 'technology' })}
+                                onClick={() => technologyAppend({ technology: 'technology' })}
                             >
                                 <span><AddCircleOutlinedIcon className='text-[#e3f8e2]' /> Add Technology Skills</span>
                             </button>
@@ -232,6 +282,7 @@ const PostJob = () => {
                     <StyleButton title='Post' className='bg-[#1DBF73] search-btn hover:bg-[#00D749] duration-500 py-[15px] px-[34px] rounded search-btn text-white' />
                 </Box>
             </form>
+
         </Box>
     );
 };

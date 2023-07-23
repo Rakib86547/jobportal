@@ -103,7 +103,7 @@ const Signup = ({ handleClose, handleClickOpen, setOpen }) => {
             }, 5000);
             dispatch(saveUsersInDB(userInfo))
         }
-        navigate('/login')
+        // navigate('/login')
     };
 
     useEffect(() => {
