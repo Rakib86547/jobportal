@@ -10,7 +10,7 @@ const MyProfile = () => {
     const user = useSelector((state) => state.auth.user);
     const { data } = useGetUpdateUserQuery(user?.email);
     const profile = useSelector((state) => state.profile)
-    console.log('profile image', profile.image)
+
     return (
         <Box sx={{
             width: '100%',

@@ -330,3 +330,9 @@ input.control-input:focus-visible {
         width: 100%
     }
 }
+
+.avatar-title {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 10% !important;
+}

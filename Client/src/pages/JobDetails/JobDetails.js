@@ -32,6 +32,7 @@ const JobDetails = () => {
     const { data: allRipley } = useGetRipleyQuery(id, {pollingInterval: 5000});
     const [query] = useQuestionsMutation();
     const [ripley] = useRipleyMutation()
+    console.log(jobData) 
     if (isLoading) {
         return <Loading />
     };
@@ -109,7 +110,7 @@ const JobDetails = () => {
                     <Box sx={{
                         display: "flex"
                     }}>
-                        <figure className='rounded-full'>
+                        <figure className='rounded-full w-[100px]'>
                             <img className='' src={jobData.data?.img} alt='' />
                         </figure>
                         <CardContent sx={{ marginLeft: { lg: '', md: '0' } }}>
@@ -119,7 +120,7 @@ const JobDetails = () => {
                                     fontSize: '26px',
                                     fontWeight: 500,
                                 }} gutterBottom variant="h5" component="div">
-                                {jobData.data?.job_title}
+                                {jobData.data?.position}
                             </Typography>
 
                             <Box sx={{ display: 'flex', padding: '5px 0' }}>
@@ -138,7 +139,7 @@ const JobDetails = () => {
                             </Typography>
                         </CardContent>
                     </Box>
-                    <Box sx={{
+                    {user?.role ===  'Candidate' && <Box sx={{
                         display: 'flex'
                     }}>
                         <Button
@@ -158,7 +159,7 @@ const JobDetails = () => {
                         }}>
                             <BsBookmarkPlus title='Save' />
                         </IconButton>
-                    </Box>
+                    </Box>}
 
                 </Card>
             </Box>
@@ -167,12 +168,13 @@ const JobDetails = () => {
             <Box sx={{
                 padding: '20px 0px',
                 // display: 'flex',
-                display: { xs: 'block', md: 'flex' }
+                display: { xs: 'block', md: 'flex' },                
 
             }}>
                 <Stack spacing={3} sx={{
-                    flex: 1,
-                    paddingRight: '20px'
+                    // flex: 1,
+                    paddingRight: '20px',
+                    width: {lg: '70%'}
                 }}>
                     <Box>
                         <Typography variant='h6'>Job Description</Typography>
@@ -214,13 +216,13 @@ const JobDetails = () => {
                                 ))
                             }
                         </Box>
-
-
                     </Box>
                 </Stack>
 
+
+{/* job Overview------------- */}
                 <Box sx={{
-                    width: { xs: '100%', md: '25%' },
+                    width: { xs: '100%', md: '25%', },
                     background: '#e3f8e2',
                     borderRadius: '10px',
                     padding: '20px'
@@ -232,7 +234,7 @@ const JobDetails = () => {
                                 <CalendarTodayOutlinedIcon sx={{ marginTop: '8px', color: '#1DBF73' }} />
                                 <Box sx={{ marginLeft: '15px' }}>
                                     <Typography>Date Posted:</Typography>
-                                    {/* <Typography>{jobData?.data?.updatedAt.slice(0, 10)}</Typography> */}
+                                    <Typography>{jobData?.data?.updatedAt.slice(0, 10)}</Typography>
                                 </Box>
                             </Box>
                         </Box>
@@ -276,6 +278,12 @@ const JobDetails = () => {
                     </Stack>
                 </Box>
             </Box>
+
+
+
+
+
+
             {/* ----------- general Q&A ------------- */}
 
             {/* ----- question section -----         */}

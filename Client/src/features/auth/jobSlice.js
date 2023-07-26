@@ -25,7 +25,7 @@ export const jobSlice = createSlice({
         jobTitle: (state, action) => {
             state.job_title = action.payload;
         },
-        img: (state, action) => {
+        jobImg: (state, action) => {
             state.img = action.payload;
         },
         location: (state, action) => {
@@ -43,14 +43,16 @@ export const jobSlice = createSlice({
         jobDescription: (state, action) => {
             state.job_description = action.payload;
         },
-        keyResponsibilities: (state, action) => {            
-            state.key_responsibilities.push(action.payload)
+        keyResponsibilities: (state, action) => {
+            const key = action.payload;
+            state.key_responsibilities.push(key)
         },
         skillExperience: (state, action) => {
             state.skill_experience.push(action.payload)
         },
         jobSkills: (state, action) => {
-            state.job_skills.push(action.payload)
+            const job = action.payload;
+            state.job_skills.push(job)
         },
         applicationDeadline: (state, action) => {
             state.application_deadline = action.payload;
@@ -58,13 +60,21 @@ export const jobSlice = createSlice({
         jobType: (state, action) => {
             state.job_type = action.payload;
         },
+        removeKey: (state, action) => {
+            state.key_responsibilities = []
+        },
+        removeSkill: (state, action) => {
+            state.skill_experience = []
+        },
+        removeJob: (state) => {
+            state.job_skills = []
+        },
     }
 });
 
 export const {
     jobTitle,
     experience,
-    img,    
     location,
     position,
     salary,
@@ -73,6 +83,11 @@ export const {
     jobSkills,
     keyResponsibilities,
     skillExperience,
-    jobType
+    jobType,
+    removeJob,
+    removeKey,
+    removeSkill,
+    removeImage,
+    jobImg
 } = jobSlice.actions
 export default jobSlice.reducer
