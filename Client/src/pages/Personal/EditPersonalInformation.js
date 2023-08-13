@@ -127,12 +127,14 @@ const EditPersonalInformation = () => {
 
                 </Box>
 
-                <Box sx={{ padding: '20px 0', textAlign: 'center', display: 'inline-block' }}>
-                    <Link
-                        onClick={handlePersonal}
-                    >
-                        <StyleButton title={isLoading ? <Spinner /> : 'Save'} className='bg-[#1DBF73] search-btn hover:bg-[#00D749] duration-500 py-[15px] px-[34px] rounded search-btn text-white' />
-                    </Link>
+                <Box sx={{ padding: '20px 0', textAlign: 'center' }}>
+                    <Box sx={{ display: 'inline-block' }}>
+                        <Link
+                            onClick={handlePersonal}
+                        >
+                            <StyleButton title={isLoading ? <Spinner /> : 'Save'} className='bg-[#1DBF73] search-btn hover:bg-[#00D749] duration-500 py-[15px] px-[34px] rounded search-btn text-white' />
+                        </Link>
+                    </Box>
                 </Box>
             </Stack>
         </Box>

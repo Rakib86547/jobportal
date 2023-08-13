@@ -8,6 +8,7 @@ import educationSlice from "../features/auth/educationSlice";
 import workSlice from "../features/auth/workSlice";
 import  companyProfileSlice  from "../features/auth/companyProfileSlice";
 import jobSlice from "../features/auth/jobSlice";
+import skillsSlice from "../features/auth/skillsSlice";
 
 
 const store = configureStore({
@@ -20,7 +21,8 @@ const store = configureStore({
         education: educationSlice,
         work: workSlice,
         company: companyProfileSlice,
-        job: jobSlice
+        job: jobSlice,
+        skills: skillsSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
 });

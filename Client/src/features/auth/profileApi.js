@@ -3,8 +3,8 @@ import apiSlice from "../api/apiSlice";
 const profileAuth = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         updateProfile: builder.mutation({
-            query: ({ email, ...data }) => ({
-                url: `/profile/${email}`,
+            query: (data) => ({
+                url: '/profile',
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json',

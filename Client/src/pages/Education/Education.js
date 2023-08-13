@@ -12,7 +12,6 @@ const Education = () => {
     const user = useSelector((state) => state.auth.user);
     const email = user?.email
     const { data } = useGetEducationQuery(email)
-
     const handleOpen = () => setOpen(true);
     const handleClose = () => { setOpen(false) };
 

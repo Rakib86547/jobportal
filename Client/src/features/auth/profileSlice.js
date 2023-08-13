@@ -7,7 +7,7 @@ const initialState = {
     website: '',
     language: '',
     age: '',
-    image: '',
+    img: '',
     description: '',
 };
 

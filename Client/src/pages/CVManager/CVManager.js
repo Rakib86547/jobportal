@@ -1,10 +1,12 @@
 import React, { } from 'react';
 import Box from '@mui/material/Box';
 import StyleButton from '../../Components/Button/StyleButton';
-import { IconButton, Typography } from '@mui/material';
+import { IconButton, Link, Typography } from '@mui/material';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { useDeleteFileMutation, useFileUploadMutation, useGetFileQuery } from '../../features/auth/fileApi';
 import { useSelector } from 'react-redux';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import '../../App.css';
 
 const CVManager = () => {
     const user = useSelector((state) => state.auth.user);
@@ -26,6 +28,10 @@ const CVManager = () => {
         console.log('delete');
         const id = currentData?.data?._id
         deleteFile(id)
+    }
+    const openLinkInNewTab = (pdf) => {
+        const newTab = window.open(pdf, '_blank', 'noopener,noreferrer');
+        if (newTab) newTab.opener = null;
     }
     return (
         <Box sx={{}}>
@@ -83,6 +89,14 @@ const CVManager = () => {
                             right: 0,
                         }}>
                         <DeleteOutlineOutlinedIcon sx={{ color: 'red' }} title='Delete' />
+                    </IconButton>
+
+                    <IconButton sx={{
+                        position: 'absolute',
+                        top: -8,
+                        right: 30,
+                    }}>
+                        <Link onClick={() => openLinkInNewTab(`${currentData?.data?.path}`)}><VisibilityOutlinedIcon className='cursor-pointer' title='See' /></Link>
                     </IconButton>
                 </Box>}
             </Box>

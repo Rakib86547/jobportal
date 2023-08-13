@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import StyleButton from '../../Components/Button/StyleButton';
 import { Link, useNavigate } from 'react-router-dom';
-import { editAge, editDescription, editImage, editJobTitle, editLanguage, editName, editPhone, editWebsite } from '../../features/auth/profileSlice';
+import { editAge, editDescription, editJobTitle, editLanguage, editName, editPhone, editWebsite } from '../../features/auth/profileSlice';
 import { useUpdateProfileMutation } from '../../features/auth/profileApi';
 import Spinner from '../../Components/Spinner/Spinner';
 import '../../App.css';
@@ -13,7 +13,7 @@ import '../../App.css';
 
 const EditProfile = () => {
     const data = useSelector((state) => state.profile);
-    // const profile = useSelector((state) => state.profile)
+    const user = useSelector((state) => state.auth.user)
     const [updateProfile, { isSuccess, isLoading }] = useUpdateProfileMutation();
     const [image, setImage] = useState({})
     const dispatch = useDispatch();
@@ -23,7 +23,18 @@ const EditProfile = () => {
         navigate('/dashboard/profile')
     }
 
+
     const handleUpdateProfile = () => {
+        const allEditData = {
+            email: user?.email,
+            name: data?.name,
+            job_title: data?.job_title,
+            website: data?.website,
+            language: data?.language,
+            phone: data?.phone,
+            age: data?.age,
+            description: data?.description
+        }
         const formData = new FormData()
         formData.append('image', image)
         const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMAGE_HOSTING_KEY}`
@@ -34,9 +45,9 @@ const EditProfile = () => {
             .then(res => res.json())
             .then((imageData) => {
                 if (imageData.success) {
-                    // setImageUrl(imageData.data.url)
-                    dispatch(editImage(imageData.data.url));
-                    updateProfile(data);
+                    const img = imageData?.data?.url;
+                    const updateData = { ...allEditData, img };
+                    updateProfile(updateData);
                 }
             })
     }
@@ -129,12 +140,15 @@ const EditProfile = () => {
                 </Box>
 
                 <Box sx={{ padding: '20px 0', textAlign: 'center' }}>
-                    <Link
-                        // onClick={() => updateProfile(data)}
-                        onClick={handleUpdateProfile}
-                    >
-                        <StyleButton title={isLoading ? <Spinner /> : 'Save'} className='bg-[#1DBF73] search-btn hover:bg-[#00D749] duration-500 py-[15px] px-[34px] rounded search-btn text-white' />
-                    </Link>
+                    <Box sx={{display: 'inline-block'}}>
+                        <Link
+                            // onClick={() => updateProfile(data)}
+                            onClick={handleUpdateProfile}
+                        >
+                            <StyleButton title={isLoading ? <Spinner /> : 'Save'} className='bg-[#1DBF73] search-btn hover:bg-[#00D749] duration-500 py-[15px] px-[34px] rounded search-btn text-white' />
+                        </Link>
+                    </Box>
+
                 </Box>
             </Stack>
         </Box>

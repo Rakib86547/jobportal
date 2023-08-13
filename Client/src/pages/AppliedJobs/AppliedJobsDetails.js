@@ -25,8 +25,8 @@ const AppliedJobsDetails = ({ jobs }) => {
                     <Box sx={{
                         display: "flex"
                     }}>
-                        <figure className='rounded-full'>
-                            <img className='' src={img} alt='' />
+                        <figure className='rounded-full w-[100px] h-[100px]'>
+                            <img className='w-full' src={img} alt='applied' />
                         </figure>
                         <CardContent sx={{ marginLeft: { lg: '', md: '0' } }}>
 

@@ -19,6 +19,7 @@ import '../../App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { isOpen } from '../../features/auth/openSlice';
 import { Avatar } from '@mui/material';
+import { useGetUpdateUserQuery } from '../../features/auth/profileApi';
 
 
 
@@ -26,10 +27,10 @@ const DashboardNavbar = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     const value = useSelector((state) => state.open.value)
-    const profile = useSelector((state) => state.profile)
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const user = useSelector((state) => state.auth.user);
+    const { data } = useGetUpdateUserQuery(user?.email);
     const dispatch = useDispatch()
 
     const handleProfileMenuOpen = (event) => {
@@ -165,7 +166,7 @@ const DashboardNavbar = () => {
                                 onClick={handleProfileMenuOpen}
                                 color="inherit"
                             >
-                                <Avatar alt="Travis Howard" src={profile?.image} />
+                                <Avatar alt="Travis Howard" src={data?.data?.img} />
                                 {/* <AccountCircle /> */}
                             </IconButton>
                         </Box>
@@ -185,14 +186,14 @@ const DashboardNavbar = () => {
                             <IconButton
                                 onClick={() => dispatch(isOpen())}
                             >
-                                {value ? <ClearOutlinedIcon /> : <MenuOutlinedIcon /> }
+                                {value ? <ClearOutlinedIcon /> : <MenuOutlinedIcon />}
                             </IconButton>
                         </Box>
                     </Toolbar>
                 </AppBar>
                 {renderMobileMenu}
                 {renderMenu}
-            </Box>            
+            </Box>
         </Box>
     );
 }

@@ -298,6 +298,10 @@ input.control-input-input{
     width: 50%;
 }
 
+/* .control-input-23{
+    width: 85% !important;
+} */
+
 @media screen and (max-width: 900px) {
     .control-input-input{
         width: 90% !important
@@ -324,7 +328,31 @@ input.control-input:focus-visible {
 .label {
     width: 50%
 }
-
+.skill{
+    display: flex !important;
+    flex-wrap: wrap !important;
+}
+@media screen and (max-width: 768px) {
+    .form{
+        display: flex;
+        flex-direction: column;
+    }
+    .add-btn{
+        margin-top: 15px;
+    }
+    .skill-input{
+        width: 100% !important;
+    }
+}
+.css-1wc72tp-MuiButtonBase-root-MuiIconButton-root:hover{
+    background: transparent !important;
+}
+.css-1wc72tp-MuiButtonBase-root-MuiIconButton-root{
+    background: transparent !important;
+}
+.css-15g94h9-MuiButtonBase-root-MuiIconButton-root:hover {
+    background-color: transparent !important
+}
 @media screen and (max-width: 900px) {
     .label {
         width: 100%
