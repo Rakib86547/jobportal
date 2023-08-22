@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {  } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -36,8 +36,6 @@ const ManageJobs = () => {
         deleteJob(job?._id)
     }
 
-
-
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650,  }} aria-label="simple table">
@@ -63,18 +61,20 @@ const ManageJobs = () => {
                                         row?.company_infortmation.map(company => (
                                             <Box sx={{ marginTop: '8px' }}>
                                                 <span className='flex'><VscBriefcase className='w-[20px] h-[20px] mr-1' />  <Typography>{company?.company_name}</Typography></span>
-                                                <span className='flex'>  <CiLocationOn className='w-[20px] h-[20px]' />  <Typography>{company?.location}</Typography></span>
+                                                <span className='flex'>  <CiLocationOn className='w-[20px] h-[20px] d' />  <Typography>{company?.location}</Typography></span>
                                             </Box>
                                         ))
                                     }
                                 </Box>
                             </TableCell>
-                            <TableCell align="center"><Link>{row.applicants.length} applicants</Link></TableCell>
+                            <TableCell align="center"><Link to={`/dashboard/applicants/${row._id}`}>{row.applicants.length} applicants</Link></TableCell>
                             <TableCell align="center">{row.createdAt.slice(0, 10)} & <br /> {row.application_deadline.slice(0, 10)}</TableCell>
                             <TableCell align="center">
                                 <Box>
-                                    <span className='inline-block cursor-pointer bg-[#e3f8e2] text-[#1DBF73] w-[35px] h-[35px] rounded-[8px] text-[16px] hover:bg-[#1DBF73] duration-500 hover:text-[#fff] mr-[8px]'><VisibilityOutlinedIcon className='mt-[5px]' /></span>
-                                    <span onClick={() => handleDelete(row)} className='inline-block cursor-pointer bg-[#e3f8e2] text-[#1DBF73] w-[35px] h-[35px] rounded-[8px] hover:bg-[#1DBF73] duration-500 hover:text-[#fff] '><DeleteOutlinedIcon className='mt-[5px]' /></span>
+                                    <span className='inline-block cursor-pointer bg-[#e3f8e2] text-[#1DBF73] w-[35px] h-[35px] rounded-[8px] text-[16px] hover:bg-[#1DBF73] duration-500 hover:text-[#fff] mr-[8px]'>
+                                        <Link to={`/dashboard/manage-jobs/${row._id}`}><VisibilityOutlinedIcon className='mt-[5px]' /></Link>
+                                        </span>
+                                    <span onClick={() => handleDelete(row)} className='inline-block cursor-pointer bg-[#e3f8e2] text-[#1DBF73] w-[35px] h-[35px] rounded-[8px] hover:bg-[#1DBF73] duration-500 hover:text-[#fff] '><DeleteOutlinedIcon className='mt-[5px] ' /></span>
                                 </Box>
                             </TableCell>
                         </TableRow>

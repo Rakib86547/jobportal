@@ -17,7 +17,7 @@ const EditCompanyProfile = () => {
     const user = useSelector((state) => state.auth.user);
     const [postData, { isLoading, isSuccess }] = usePostCompanyProfileMutation();
     const navigate = useNavigate()
-    
+
     const handleCompanyInfo = () => {
         const data = {
             user_email: user?.email,
@@ -176,18 +176,19 @@ const EditCompanyProfile = () => {
                             </label>
                         </Stack>
                     </Box>
-
                 </Box>
                 <Box sx={{ width: '100%', marginTop: '30px' }}>
                     <Typography variant='body' sx={{ marginBottom: '10px' }}>About Company</Typography>
                     <textarea value={company?.company_about} onChange={(e) => dispatch(companyAbout(e.target.value))} placeholder='Write about your Company' className='w-full input-box-box' rows="10" />
                 </Box>
                 <Box sx={{ padding: '20px 0', textAlign: 'center', display: 'inline-block' }}>
-                    <Link
-                        onClick={handleCompanyInfo}
-                    >
-                        <StyleButton title={isLoading ? <Spinner /> : 'Save'} className='bg-[#1DBF73] search-btn hover:bg-[#00D749] duration-500 py-[15px] px-[34px] rounded search-btn text-white' />
-                    </Link>
+                    <Box sx={{ display: 'inline-block' }}>
+                        <Link
+                            onClick={handleCompanyInfo}
+                        >
+                            <StyleButton title={isLoading ? <Spinner /> : 'Save'} className='bg-[#1DBF73] search-btn hover:bg-[#00D749] duration-500 py-[15px] px-[34px] rounded search-btn text-white' />
+                        </Link>
+                    </Box>
                 </Box>
             </Stack>
         </Box>

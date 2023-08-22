@@ -104,8 +104,18 @@ const jobAuth = apiSlice.injectEndpoints({
                 }
             }),
             invalidatesTags: ["Job"]
+        }),
+        getManageJob: builder.query({
+            query: (id) => ({
+                url: `/jobs/manage-jobs/${id}`,
+                method: "GET",
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('userToken')}`
+                }
+            })
         })
     })
 });
 
-export const { useDeleteJobMutation, useGetHRJobsQuery, usePostJobMutation, useApplyMutation, useGetAppliedJobsQuery, useQuestionsMutation, useGetRipleyQuery, useGetQuestionsQuery, useRipleyMutation } = jobAuth;
+export const { useGetManageJobQuery, useDeleteJobMutation, useGetHRJobsQuery, usePostJobMutation, useApplyMutation, useGetAppliedJobsQuery, useQuestionsMutation, useGetRipleyQuery, useGetQuestionsQuery, useRipleyMutation } = jobAuth;

@@ -51,26 +51,26 @@ const DashboardNavbar = () => {
     };
 
     const menuId = 'primary-search-account-menu';
-    const renderMenu = (
-        <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            id={menuId}
-            keepMounted
-            transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-        >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-        </Menu>
-    );
+    // const renderMenu = (
+    //     <Menu
+    //         anchorEl={anchorEl}
+    //         anchorOrigin={{
+    //             vertical: 'top',
+    //             horizontal: 'right',
+    //         }}
+    //         id={menuId}
+    //         keepMounted
+    //         transformOrigin={{
+    //             vertical: 'top',
+    //             horizontal: 'right',
+    //         }}
+    //         open={isMenuOpen}
+    //         onClose={handleMenuClose}
+    //     >
+    //         <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+    //         <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    //     </Menu>
+    // );
 
     const mobileMenuId = 'primary-search-account-menu-mobile';
     const renderMobileMenu = (
@@ -80,6 +80,7 @@ const DashboardNavbar = () => {
                 vertical: 'top',
                 horizontal: 'right',
             }}
+            className='profile-menu'
             id={mobileMenuId}
             keepMounted
             transformOrigin={{
@@ -109,7 +110,7 @@ const DashboardNavbar = () => {
                 </IconButton>
                 <p>Notifications</p>
             </MenuItem>
-            <MenuItem onClick={handleProfileMenuOpen}>
+            {/* <MenuItem onClick={handleProfileMenuOpen}>
                 <IconButton
                     size="large"
                     aria-label="account of current user"
@@ -120,7 +121,7 @@ const DashboardNavbar = () => {
                     <AccountCircle />
                 </IconButton>
                 <p>Profile</p>
-            </MenuItem>
+            </MenuItem> */}
         </Menu>
     );
 
@@ -192,7 +193,7 @@ const DashboardNavbar = () => {
                     </Toolbar>
                 </AppBar>
                 {renderMobileMenu}
-                {renderMenu}
+                {/* {renderMenu} */}
             </Box>
         </Box>
     );

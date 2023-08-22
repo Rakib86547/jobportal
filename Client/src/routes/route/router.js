@@ -22,6 +22,9 @@ import EditProfile from "../../pages/EditProfile/EditProfile";
 import EditPersonalInformation from "../../pages/Personal/EditPersonalInformation";
 import PrivetRoute from "../PrivetRoute/PrivetRoute";
 import EditCompanyProfile from "../../pages/CompanyProfile/EditCompanyProfile";
+import ManageJobDetails from "../../pages/ManageJobs/ManageJobDetails";
+import Applicants from "../../pages/ManageJobs/Applicants";
+import ApplierDetails from "../../pages/ManageJobs/ApplierDetails";
 
 
 
@@ -117,6 +120,18 @@ const router = createBrowserRouter([{
         {
             path: '/dashboard/edit-company-information',
             element: <PrivetRoute ><EditCompanyProfile /></PrivetRoute>
+        },
+        {
+            path: '/dashboard/manage-jobs/:id',
+            element: <PrivetRoute><ManageJobDetails /></PrivetRoute>,
+        },
+        {
+            path: '/dashboard/applicants/:id',
+            element: <PrivetRoute><Applicants /></PrivetRoute>,
+        },
+        {
+            path: '/dashboard/applier/:email',
+            element: <PrivetRoute><ApplierDetails /></PrivetRoute>,
         },
     ]
 }

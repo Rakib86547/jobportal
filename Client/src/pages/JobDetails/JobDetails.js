@@ -1,6 +1,6 @@
 import { Box, Button, Card, CardContent, IconButton, List, ListItem, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useGetJobDetailsQuery } from '../../features/auth/authApi';
 import Loading from '../../Components/Loading/Loading';
 import { BsBookmarkPlus } from 'react-icons/bs';
@@ -12,6 +12,7 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import AccountBalanceOutlinedIcon from '@mui/icons-material/AccountBalanceOutlined';
+import LanguageIcon from '@mui/icons-material/Language';
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import SubdirectoryArrowRightOutlinedIcon from '@mui/icons-material/SubdirectoryArrowRightOutlined';
 import StyleButton from '../../Components/Button/StyleButton';
@@ -28,24 +29,25 @@ const JobDetails = () => {
     const user = useSelector((state) => state.auth.user);
     const { id } = useParams();
     const { data: jobData, isLoading, isError } = useGetJobDetailsQuery(id);
-    const { data: allQuestion } = useGetQuestionsQuery(id, {pollingInterval: 5000});
-    const { data: allRipley } = useGetRipleyQuery(id, {pollingInterval: 5000});
+    const { data: allQuestion } = useGetQuestionsQuery(id, { pollingInterval: 5000 });
+    const { data: allRipley } = useGetRipleyQuery(id, { pollingInterval: 5000 });
     const [query] = useQuestionsMutation();
     const [ripley] = useRipleyMutation()
-    console.log(jobData) 
     if (isLoading) {
         return <Loading />
     };
     if (isError) {
         return <Typography variant='h5'>Something Went Wrong....</Typography>
     }
-
+    console.log(user)
     const handleApply = () => {
+        
         const id = jobData?.data?._id
         const applyData = {
             jobId: jobData?.data?._id,
             userId: user?._id,
-            email: user?.email
+            email: user?.email,
+            name: user?.name
         }
         fetch(`${process.env.REACT_APP_URL}/jobs/apply/${id}`, {
             method: "PUT",
@@ -93,6 +95,11 @@ const JobDetails = () => {
         setCurrentRipley(data.ripley)
         reset()
     }
+
+    const openLinkInNewTab = (url) => {
+        const newTab = window.open(url, '_blank', 'noopener,noreferrer')
+        if(newTab) newTab.opener = null
+    }
     return (
         <Box sx={{ padding: '60px 0px' }}>
             <Box sx={{
@@ -139,7 +146,7 @@ const JobDetails = () => {
                             </Typography>
                         </CardContent>
                     </Box>
-                    {user?.role ===  'Candidate' && <Box sx={{
+                    {user?.role === 'Candidate' && <Box sx={{
                         display: 'flex'
                     }}>
                         <Button
@@ -168,13 +175,13 @@ const JobDetails = () => {
             <Box sx={{
                 padding: '20px 0px',
                 // display: 'flex',
-                display: { xs: 'block', md: 'flex' },                
+                display: { xs: 'block', md: 'flex' },
 
             }}>
                 <Stack spacing={3} sx={{
                     // flex: 1,
                     paddingRight: '20px',
-                    width: {lg: '70%'}
+                    width: { lg: '70%' }
                 }}>
                     <Box>
                         <Typography variant='h6'>Job Description</Typography>
@@ -220,7 +227,7 @@ const JobDetails = () => {
                 </Stack>
 
 
-{/* job Overview------------- */}
+                {/* job Overview------------- */}
                 <Box sx={{
                     width: { xs: '100%', md: '25%', },
                     background: '#e3f8e2',
@@ -235,6 +242,15 @@ const JobDetails = () => {
                                 <Box sx={{ marginLeft: '15px' }}>
                                     <Typography>Date Posted:</Typography>
                                     <Typography>{jobData?.data?.updatedAt.slice(0, 10)}</Typography>
+                                </Box>
+                            </Box>
+                        </Box>
+                        <Box sx={{ marginTop: '15px' }}>
+                            <Box sx={{ display: 'flex' }}>
+                                <CalendarTodayOutlinedIcon sx={{ marginTop: '8px', color: '#1DBF73' }} />
+                                <Box sx={{ marginLeft: '15px' }}>
+                                    <Typography>Application Deadline:</Typography>
+                                    <Typography>{jobData?.data?.application_deadline.slice(0, 10)}</Typography>
                                 </Box>
                             </Box>
                         </Box>
@@ -270,7 +286,20 @@ const JobDetails = () => {
                                 <AccountBalanceOutlinedIcon sx={{ marginTop: '8px', color: '#1DBF73' }} />
                                 <Box sx={{ marginLeft: '15px' }}>
                                     <Typography>Company:</Typography>
-                                    <Typography>{jobData?.data?.company}</Typography>
+                                    {
+                                        jobData?.data?.company_infortmation.map(info => (<Typography>{info.company_name}</Typography>))
+                                    }
+                                </Box>
+                            </Box>
+                        </Box>
+                        <Box sx={{ marginTop: '15px' }}>
+                            <Box sx={{ display: 'flex' }}>
+                                <LanguageIcon sx={{ marginTop: '8px', color: '#1DBF73' }} />
+                                <Box sx={{ marginLeft: '15px' }}>
+                                    <Typography>Website:</Typography>
+                                    {
+                                        jobData?.data?.company_infortmation.map(info => (<Typography><Link onClick={() => openLinkInNewTab(`${info?.website}`)} className='hover:text-blue-600'>{info.website}</Link></Typography>))
+                                    }
                                 </Box>
                             </Box>
                         </Box>
