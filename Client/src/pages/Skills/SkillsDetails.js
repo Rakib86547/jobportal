@@ -4,8 +4,10 @@ import React from 'react';
 import { useDeleteSkillMutation } from '../../features/auth/skillsApi';
 import { toast } from 'react-hot-toast';
 import '../../App.css';
+import { useSelector } from 'react-redux';
 
 const SkillsDetails = ({ skill }) => {
+    const user = useSelector((state) => state.auth.user);
     const [deleteSkill, result] = useDeleteSkillMutation()
     const DeleteSkill = (deleteData) => {
         deleteSkill(deleteData?._id);
@@ -25,9 +27,9 @@ const SkillsDetails = ({ skill }) => {
                     // display: 'inline-block'
                 }}>
                     {skill?.skills}                   
-                    <span
+                    {user?.role === 'Candidate' && <span
                         onClick={() => DeleteSkill(skill)}
-                        className='cursor-pointer hover:text-red-400 duration-300 ml-2'><CloseIcon /></span>
+                        className='cursor-pointer hover:text-red-400 duration-300 ml-2'><CloseIcon /></span>}
                 </Typography>
             </Box>
         </Box>

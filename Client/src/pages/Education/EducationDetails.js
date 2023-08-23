@@ -6,8 +6,10 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditEducationModal from './EditEducationModal';
 import { useDeleteEducationMutation } from '../../features/auth/educationalApi';
 import { toast } from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 
 const EducationDetails = ({ education }) => {
+    const user = useSelector((state) => state.auth.user);
     const [editOpen, setEditOpen] = useState(false);
     const [deleteEducation] = useDeleteEducationMutation();
 
@@ -33,8 +35,8 @@ const EducationDetails = ({ education }) => {
                         borderRadius: '30px',
                         background: '#e3f8e2'
                     }}>{education.start_date} to {education.end_date}</Typography>
-                    <Link onClick={handleEditModalOpen} ><span className='ml-[15px] text-[#1DBF73] rounded-[8px] px-[5px] py-[7px] bg-[#e3f8e2]'><BorderColorOutlinedIcon /></span></Link>
-                    <Link onClick={handleDeleteEducation}><span className='ml-[15px] text-red-400 rounded-[8px] px-[5px] py-[7px] bg-[#e3f8e2]'><DeleteOutlinedIcon /></span></Link>
+                    {user?.role === 'Candidate' && <Link onClick={handleEditModalOpen} ><span className='ml-[15px] text-[#1DBF73] rounded-[8px] px-[5px] py-[7px] bg-[#e3f8e2]'><BorderColorOutlinedIcon /></span></Link>}
+                    {user?.role === 'Candidate' && <Link onClick={handleDeleteEducation}><span className='ml-[15px] text-red-400 rounded-[8px] px-[5px] py-[7px] bg-[#e3f8e2]'><DeleteOutlinedIcon /></span></Link>}
                 </Box>
                 <Typography sx={{
                     marginLeft: '15px',

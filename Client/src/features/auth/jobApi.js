@@ -114,8 +114,19 @@ const jobAuth = apiSlice.injectEndpoints({
                     'authorization': `Bearer ${localStorage.getItem('userToken')}`
                 }
             })
+        }),
+        deleteApplier: builder.mutation({
+            query: (data) => ({
+                url: '/jobs/applier',
+                method: 'DELETE',
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('userToken')}`
+                },
+                body: data
+            })
         })
     })
 });
 
-export const { useGetManageJobQuery, useDeleteJobMutation, useGetHRJobsQuery, usePostJobMutation, useApplyMutation, useGetAppliedJobsQuery, useQuestionsMutation, useGetRipleyQuery, useGetQuestionsQuery, useRipleyMutation } = jobAuth;
+export const { useGetManageJobQuery, useDeleteApplierMutation, useDeleteJobMutation, useGetHRJobsQuery, usePostJobMutation, useApplyMutation, useGetAppliedJobsQuery, useQuestionsMutation, useGetRipleyQuery, useGetQuestionsQuery, useRipleyMutation } = jobAuth;

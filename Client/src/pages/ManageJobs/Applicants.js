@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useGetManageJobQuery } from '../../features/auth/jobApi';
+import { useDeleteApplierMutation, useGetManageJobQuery } from '../../features/auth/jobApi';
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, } from '@mui/material';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import { toast } from 'react-hot-toast';
 
 const Applicants = () => {
     const { id } = useParams();
+    const [name, setName] = useState()
     const { data } = useGetManageJobQuery(id);
+    const [deleteApplier, { data: deleteConfirm }] = useDeleteApplierMutation()
 
-    console.log(data)
+    const handleDelete = (applier) => {
+        setName(applier?.name)
+        const applied = { email: applier?.email, jobId: applier?.jobId }
+        console.log(applied)
+        deleteApplier(applied)
+    }
+
+    if (deleteConfirm?.data?.acknowledged) {
+        toast.success(`${name} applier is deleted`)
+    }
+    console.log(deleteConfirm)
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650, }} aria-label="simple table">
@@ -22,7 +35,7 @@ const Applicants = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data?.data?.applicants?.map((applier, index) => ( console.log(applier),
+                    {data?.data?.applicants?.map((applier, index) => (
                         <TableRow
                             key={applier._id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -35,7 +48,7 @@ const Applicants = () => {
                                     <span className='inline-block cursor-pointer bg-[#e3f8e2] text-[#1DBF73] w-[35px] h-[35px] rounded-[8px] text-[16px] hover:bg-[#1DBF73] duration-500 hover:text-[#fff] mr-[8px]'>
                                         <Link to={`/dashboard/applier/${applier.email}`}><VisibilityOutlinedIcon className='mt-[5px]' /></Link>
                                     </span>
-                                    <span className='inline-block cursor-pointer bg-[#e3f8e2] text-[#1DBF73] w-[35px] h-[35px] rounded-[8px] hover:bg-[#1DBF73] duration-500 hover:text-[#fff] '><DeleteOutlinedIcon className='mt-[5px] ' /></span>
+                                    <span onClick={() => handleDelete(applier)} className='inline-block cursor-pointer bg-[#e3f8e2] text-[#1DBF73] w-[35px] h-[35px] rounded-[8px] hover:bg-[#1DBF73] duration-500 hover:text-[#fff] '><DeleteOutlinedIcon className='mt-[5px] ' /></span>
                                 </Box>
                             </TableCell>
                         </TableRow>

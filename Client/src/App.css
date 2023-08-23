@@ -367,3 +367,14 @@ input.control-input:focus-visible {
 .profile-menu{
     top: 45px !important;
 }
+@media screen and (max-width: 900px) {
+    .message{
+        flex-direction: column !important;        
+    }
+    .message2{
+        margin-top: 5px !important;
+    }
+    .profile{
+        margin-left: 15px !important;
+    }
+}

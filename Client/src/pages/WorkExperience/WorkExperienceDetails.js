@@ -6,8 +6,10 @@ import { Link } from 'react-router-dom';
 import EditWorkExperienceModal from './EditWorkExperienceModal';
 import { useDeleteWorkMutation } from '../../features/auth/workApi';
 import { toast } from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 
 const WorkExperienceDetails = ({ work }) => {
+    const user = useSelector((state) => state.auth.user);
     const { job_title, company, start_date, end_date, description, _id: id } = work;
     const [workModalOpen, setWorkModalOpen] = useState(false);
     const [deleteWork] = useDeleteWorkMutation()
@@ -30,8 +32,8 @@ const WorkExperienceDetails = ({ work }) => {
                         borderRadius: '30px',
                         background: '#e3f8e2'
                     }}>{start_date} to {end_date}</Typography>
-                    <Link onClick={handleWorkModalOpen} ><span className='ml-[15px] text-[#1DBF73] rounded-[8px] px-[5px] py-[7px] bg-[#e3f8e2]'><BorderColorOutlinedIcon /></span></Link>
-                    <Link onClick={handleDeleteWork}><span className='ml-[15px] text-red-400 rounded-[8px] px-[5px] py-[7px] bg-[#e3f8e2]'><DeleteOutlinedIcon /></span></Link>
+                    {user?.role === 'Candidate' && <Link onClick={handleWorkModalOpen} ><span className='ml-[15px] text-[#1DBF73] rounded-[8px] px-[5px] py-[7px] bg-[#e3f8e2]'><BorderColorOutlinedIcon /></span></Link>}
+                    {user?.role === 'Candidate' && <Link onClick={handleDeleteWork}><span className='ml-[15px] text-red-400 rounded-[8px] px-[5px] py-[7px] bg-[#e3f8e2]'><DeleteOutlinedIcon /></span></Link>}
                 </Box>
                 <Typography sx={{
                     marginLeft: '15px',
