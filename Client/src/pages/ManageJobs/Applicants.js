@@ -9,20 +9,18 @@ import { toast } from 'react-hot-toast';
 const Applicants = () => {
     const { id } = useParams();
     const [name, setName] = useState()
-    const { data } = useGetManageJobQuery(id);
+    const { data } = useGetManageJobQuery(id, { refetchOnMountOrArgChange: true });
     const [deleteApplier, { data: deleteConfirm }] = useDeleteApplierMutation()
 
     const handleDelete = (applier) => {
         setName(applier?.name)
-        const applied = { email: applier?.email, jobId: applier?.jobId }
-        console.log(applied)
-        deleteApplier(applied)
+        const email = applier?.email;
+        const id = applier?.jobId;
+        deleteApplier({ email, id })
     }
-
     if (deleteConfirm?.data?.acknowledged) {
         toast.success(`${name} applier is deleted`)
     }
-    console.log(deleteConfirm)
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650, }} aria-label="simple table">

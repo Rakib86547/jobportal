@@ -8,7 +8,7 @@ import '../../App.css'
 import StyleButton from '../../Components/Button/StyleButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetCompanyProfileInfoQuery } from '../../features/auth/companyProfileApi';
-import { applicationDeadline, experience, img, jobDescription, jobImg, jobSkills, jobTitle, jobType, keyResponsibilities, location, position, removeImage, removeJob, removeKey, removeSkill, salary, skillExperience } from '../../features/auth/jobSlice';
+import { applicationDeadline, experience, jobDescription, jobImg, jobSkills, jobTitle, jobType, keyResponsibilities, location, position, removeImage, removeJob, removeKey, removeSkill, salary, skillExperience } from '../../features/auth/jobSlice';
 import { usePostJobMutation } from '../../features/auth/jobApi';
 import Spinner from '../../Components/Spinner/Spinner';
 import { toast } from 'react-hot-toast';
@@ -25,7 +25,6 @@ const PostJob = () => {
     const [image, setImage] = useState('');
     const [postJob, { isLoading }] = usePostJobMutation()
 
-console.log(companyInfo)
     const {
         fields: responsibilitiesFields,
         append: responsibilitiesAppend,

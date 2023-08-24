@@ -94,6 +94,18 @@ const jobAuth = apiSlice.injectEndpoints({
             }),
             providesTags: ["Job"]
         }),
+
+        getAllApplier: builder.query({
+            query: (email) => ({
+                url: `/jobs/all-applier/${email}`,
+                method: "GET",
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('userToken')}`
+                }
+            })
+        }),
+
         deleteJob: builder.mutation({
             query: (id) => ({
                 url: `/jobs/${id}`,
@@ -113,20 +125,21 @@ const jobAuth = apiSlice.injectEndpoints({
                     'content-type': 'application/json',
                     'authorization': `Bearer ${localStorage.getItem('userToken')}`
                 }
-            })
+            }),
+            providesTags: ["Job"]
         }),
         deleteApplier: builder.mutation({
-            query: (data) => ({
-                url: '/jobs/applier',
+            query: ({ email, id }) => ({
+                url: `/jobs/applier/${email}/${id}`,
                 method: 'DELETE',
                 headers: {
                     'content-type': 'application/json',
                     'authorization': `Bearer ${localStorage.getItem('userToken')}`
                 },
-                body: data
-            })
+            }),
+            invalidatesTags: ["Job"]
         })
     })
 });
 
-export const { useGetManageJobQuery, useDeleteApplierMutation, useDeleteJobMutation, useGetHRJobsQuery, usePostJobMutation, useApplyMutation, useGetAppliedJobsQuery, useQuestionsMutation, useGetRipleyQuery, useGetQuestionsQuery, useRipleyMutation } = jobAuth;
+export const { useGetAllApplierQuery, useGetManageJobQuery, useDeleteApplierMutation, useDeleteJobMutation, useGetHRJobsQuery, usePostJobMutation, useApplyMutation, useGetAppliedJobsQuery, useQuestionsMutation, useGetRipleyQuery, useGetQuestionsQuery, useRipleyMutation } = jobAuth;
