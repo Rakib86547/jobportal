@@ -103,7 +103,8 @@ const jobAuth = apiSlice.injectEndpoints({
                     'content-type': 'application/json',
                     'authorization': `Bearer ${localStorage.getItem('userToken')}`
                 }
-            })
+            }),
+            providesTags: ["Job"]
         }),
 
         deleteJob: builder.mutation({

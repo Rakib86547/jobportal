@@ -158,7 +158,7 @@ const DashboardNavbar = () => {
                                     <NotificationsNoneOutlinedIcon />
                                 </Badge>
                             </IconButton>
-                            <IconButton
+                           {user?.role === 'Candidate' && <IconButton
                                 size="large"
                                 edge="end"
                                 aria-label="account of current user"
@@ -167,9 +167,9 @@ const DashboardNavbar = () => {
                                 onClick={handleProfileMenuOpen}
                                 color="inherit"
                             >
-                                <Avatar alt="Travis Howard" src={data?.data?.img} />
+                                 <Avatar alt="Travis Howard" src={data?.data?.img} />
                                 {/* <AccountCircle /> */}
-                            </IconButton>
+                            </IconButton>}
                         </Box>
                         <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                             <IconButton

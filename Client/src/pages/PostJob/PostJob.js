@@ -364,7 +364,7 @@ const PostJob = () => {
                     marginTop: '25px',
                     textAlign: 'center'
                 }}>
-                    <StyleButton title={isLoading ? <Spinner /> : 'Post'} className='bg-[#1DBF73] search-btn hover:bg-[#00D749] duration-500 py-[15px] px-[34px] rounded search-btn text-white' />
+                    <StyleButton title={isLoading ? <Spinner /> : 'Post Job'} className='bg-[#1DBF73] search-btn hover:bg-[#00D749] duration-500 py-[15px] px-[34px] rounded search-btn text-white' />
                 </Box>
             </form>
 

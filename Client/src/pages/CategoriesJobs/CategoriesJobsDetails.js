@@ -6,7 +6,8 @@ import { CiLocationOn } from 'react-icons/ci';
 import { BsBookmarkPlus } from 'react-icons/bs';
 
 const CategoriesJobsDetails = ({ job }) => {
-    const { job_title, company, jobType, location, img, _id } = job;
+    const { job_title, company, jobType, location, img, _id, position } = job;
+    console.log('job details', job)
     return (
         <Box sx={{
             border: '1px solid #e3f8e2',
@@ -28,7 +29,7 @@ const CategoriesJobsDetails = ({ job }) => {
                                 fontSize: '18px',
                                 fontWeight: 500,
                             }} gutterBottom variant="h5" component="div">
-                            {job_title}
+                            {position}
                         </Typography>
                     </>
                     <Box sx={{ display: 'flex', padding: '5px 0' }}>
