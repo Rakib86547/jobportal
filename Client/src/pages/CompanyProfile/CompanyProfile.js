@@ -1,4 +1,5 @@
-import React, {  } from 'react';
+/* eslint-disable react/jsx-no-target-blank */
+import React, { } from 'react';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import { Box, Stack, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -8,7 +9,7 @@ import { useGetCompanyProfileInfoQuery } from '../../features/auth/companyProfil
 const CompanyProfile = () => {
     const user = useSelector((state) => state.auth.user);
     const email = user?.email
-    const { data: companyInfo } = useGetCompanyProfileInfoQuery(email, {refetchOnMountOrArgChange: true});
+    const { data: companyInfo } = useGetCompanyProfileInfoQuery(email, { refetchOnMountOrArgChange: true });
 
     return (
         <div>
@@ -60,7 +61,11 @@ const CompanyProfile = () => {
                         </Box>
                         <Box>
                             <Typography variant='body' sx={{ fontWeight: 'bold' }}>Website</Typography>
-                            <Typography>{companyInfo?.data?.company_website}</Typography>
+                            <Typography>
+                                <a
+                                    className='text-blue-500'
+                                    href={`${companyInfo?.data?.company_website}`} target='_blank'>{companyInfo?.data?.company_website}</a>
+                            </Typography>
                         </Box>
                         <Box>
                             <Typography variant='body' sx={{ fontWeight: 'bold' }}>Team Size</Typography>

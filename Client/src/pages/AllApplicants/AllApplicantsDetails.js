@@ -1,24 +1,10 @@
-import React, { useState } from 'react';
+import React, {  } from 'react';
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import { Link } from 'react-router-dom';
-import { useDeleteApplierMutation } from '../../features/auth/jobApi';
-import { toast } from 'react-hot-toast';
+
 
 const AllApplicantsDetails = ({ allApplier }) => {
-    // const [name, setName] = useState('')
-    // const [deleteApplier, { data: deleteConfirm }] = useDeleteApplierMutation()
-    // const handleDelete = (applier) => {
-    //     console.log(applier)
-    //     setName(applier?.name)
-    //     const email = applier?.email;
-    //     const id = applier?.jobId;
-    //     deleteApplier({ email, id })
-    // }
-    // if (deleteConfirm?.data?.acknowledged) {
-    //     toast.success(`${name} applier is deleted`)
-    // }
+    console.log(allApplier)
     return (
         <>
             <TableContainer component={Paper}>
@@ -45,5 +31,4 @@ const AllApplicantsDetails = ({ allApplier }) => {
         </>
     );
 };
-{/* <VisibilityOutlinedIcon className='mt-[5px]' /> */ }
 export default AllApplicantsDetails;

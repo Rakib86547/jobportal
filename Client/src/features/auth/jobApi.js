@@ -84,8 +84,8 @@ const jobAuth = apiSlice.injectEndpoints({
         }),
 
         getHRJobs: builder.query({
-            query: (email) => ({
-                url: `/jobs/hr-jobs/${email}`,
+            query: ({email, page, limit}) => ({
+                url: `/jobs/hr-jobs/${email}/${page}/${limit}`,
                 method: "GET",
                 headers: {
                     'content-type': 'application/json',
@@ -96,8 +96,8 @@ const jobAuth = apiSlice.injectEndpoints({
         }),
 
         getAllApplier: builder.query({
-            query: (email) => ({
-                url: `/jobs/all-applier/${email}`,
+            query: ({email, page, limit}) => ({
+                url: `/jobs/all-applier/${email}/${page}/${limit}`,
                 method: "GET",
                 headers: {
                     'content-type': 'application/json',
