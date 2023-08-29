@@ -39,7 +39,6 @@ const JobDetails = () => {
     if (isError) {
         return <Typography variant='h5'>Something Went Wrong....</Typography>
     }
-    console.log(user)
     const handleApply = () => {
         
         const id = jobData?.data?._id

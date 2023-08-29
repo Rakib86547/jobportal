@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    keywords: '',
     title: '',
-    city: '',
     country: ''
 };
 
@@ -23,11 +21,14 @@ export const searchApi = createSlice({
         searchCountry: (state, action) => {
             state.country = action.payload
         },
-        clearSearchValue: (state) => {
-            state = {}
-        }
+        clearTitle: (state) => {
+            state.title = ''
+        },
+        clearCountry: (state) => {
+            state.country = ''
+        },
     }
 });
 
-export const { searchCity, searchCountry, searchKeyword, searchTitle } = searchApi.actions;
+export const { searchCity, searchCountry, searchKeyword, searchTitle, clearCountry, clearTitle } = searchApi.actions;
 export default searchApi.reducer
