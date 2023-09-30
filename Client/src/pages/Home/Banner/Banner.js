@@ -5,43 +5,67 @@ import banner from '../../../assests/Banner/Banner.svg'
 import StyleButton from '../../../Components/Button/StyleButton';
 import { IoSearchOutline } from 'react-icons/io5'
 import { CiLocationOn } from 'react-icons/ci'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../../../App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCountry, clearTitle, searchCountry, searchTitle } from '../../../features/auth/searchSlice';
 import { useGetSearchJobsQuery } from '../../../features/auth/searchApi';
-import SearchJobsDetails from './SearchJobsDetails';
+import SearchJobsDetails from './SearchJobs';
 import CategoriesJobsDetails from '../../CategoriesJobs/CategoriesJobsDetails';
+import { toast } from 'react-hot-toast';
 // import SearchJobsDetails from './SearchJobsDetails';
 
 const Banner = () => {
     // const [keywords, setKeywords] = useState('')  
-    const [searchItems, setSearchItems] = useState({})
-    const title = searchItems?.title;
-    const location = searchItems?.location;
+    // const [searchItems, setSearchItems] = useState({})
+    // const title = searchItems?.title;
+    // const location = searchItems?.location;
+    // console.log(searchItems)
 
     const searchValue = useSelector((state) => state.search);
-    const { data } = useGetSearchJobsQuery({ title, location })
+    const searchKeywords = { title: searchValue?.title, location: searchValue?.country }
+    // console.log('search value', searchValue)
+    // const { data } = useGetSearchJobsQuery({ title, location })
+    // const searches = { title, location }
+    // console.log('searches', searches)
     const dispatch = useDispatch();
-    const navigate = useNavigate()
-    const handleJobsSearch = () => {
-        const searchKeywords = {
-            title: searchValue?.title,
-            location: searchValue?.country
-        };
-        // Only set searchItems if either title or location is provided
-        if (searchKeywords.title || searchKeywords.location) {
-            setSearchItems(searchKeywords);
-            if (data?.status === 'Success') {
-                clearCountry();
-                clearTitle()
-            }
-        } else {
-            // If neither title nor location is provided, clear searchItems
-            setSearchItems({});
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    // const handleJobsSearch = () => {               
+    //     // const searchKeywords = {
+    //     //     title: searchValue?.title,
+    //     //     location: searchValue?.country
+    //     // };
+    //     // if (locations.pathname !== '/search') {
+    //     //     navigate('/search', { state: searchKeywords})
+    //     // }
+    //     // Only set searchItems if either title or location is provided
+    //     // if (searchKeywords.title || searchKeywords.location) {
+    //     //     setSearchItems(searchKeywords);
+    //     //     if (data?.status === 'Success') {
+    //     //         clearCountry();
+    //     //         clearTitle()
+    //     //     }
+    //     // } else {
+    //     //     // If neither title nor location is provided, clear searchItems
+    //     //     setSearchItems({});
+    //     // }
+    // }
+
+    const handleJobsSearch = (e) => {
+        e.preventDefault()
+        if (searchValue?.title === '' && searchValue?.country === '') {
+            return toast.error('please write search value')
         }
-        if(searchItems){
-            navigate('/find-jobs')
+        if (location.pathname !== '/search-jobs') {
+            navigate('/search-jobs', { state: searchKeywords });
+        }
+        if (!searchValue?.title === '' || searchValue?.country === '') {
+            setTimeout(() => {
+                dispatch(clearCountry());
+                dispatch(clearTitle())
+            }, 3000);
         }
     }
     return (
@@ -88,10 +112,10 @@ const Banner = () => {
                                     <span className='text-[30px]'><CiLocationOn /></span>
                                 </Box>
                             </Box>
-                            <Link to={title === `${searchValue?.title}` || location === `${searchValue?.country}` ? '/find-jobs' : '/'} onClick={handleJobsSearch} className='btn'>
+                            <Box onClick={handleJobsSearch} className='btn'>
                                 <StyleButton title='Find Jobs' className='bg-[#1DBF73] search-btn hover:bg-[#00D749] duration-500 py-[15px] px-[34px] rounded search-btn text-white' />
 
-                            </Link>
+                            </Box>
                         </form>
                     </Box>
                 </Box>
@@ -107,19 +131,6 @@ const Banner = () => {
                     </Box>
                 </Hidden>
             </Box>
-            {/* <Box>
-                {
-                    data?.status === "Success" &&
-                    <Grid lg={12} item container spacing={3} justifyContent='center'>
-                        {
-                            data?.data?.map(jobs =>
-                                <Grid key={jobs._id} item lg={4} sm={6} xs={12}>
-                                    <CategoriesJobsDetails key={jobs._id} job={jobs} />
-                                </Grid>)
-                        }
-                    </Grid>
-                }
-            </Box> */}
         </Box>
     );
 };

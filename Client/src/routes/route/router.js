@@ -25,6 +25,7 @@ import EditCompanyProfile from "../../pages/CompanyProfile/EditCompanyProfile";
 import ManageJobDetails from "../../pages/ManageJobs/ManageJobDetails";
 import Applicants from "../../pages/ManageJobs/Applicants";
 import ApplierDetails from "../../pages/ManageJobs/ApplierDetails";
+import SearchJobs from "../../pages/Home/Banner/SearchJobs";
 
 
 
@@ -61,6 +62,10 @@ const router = createBrowserRouter([{
             path: 'api/v1/jobs/job-details/:id',
             element: <JobDetails />,
         },
+        {
+            path: '/search-jobs',
+            element: <SearchJobs />
+        }
     ],
 },
 
