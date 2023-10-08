@@ -1,10 +1,17 @@
 import { Box, Grid, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useGetAllFeatureJobsQuery } from '../../../features/auth/featureJobsApi';
 import FeatureJobsDetails from './FeatureJobsDetails';
 
 const MoreFeatureJobs = () => {
-    const {data} = useGetAllFeatureJobsQuery();
+    const [page, setPage] = useState(1);
+    const [totalData, setTotalData] = useState(0)
+    const limit = 8;
+    const { data, isLoading } = useGetAllFeatureJobsQuery({ page, limit });
+
+    useEffect(() => {
+        setTotalData(data?.total)
+    }, [data])
     console.log(data)
     return (
         <Box>
