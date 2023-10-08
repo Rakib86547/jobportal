@@ -1,57 +1,22 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Box, Divider, Grid, Hidden, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { Box, Divider, Hidden, Typography } from '@mui/material';
+import React, { } from 'react';
 import banner from '../../../assests/Banner/Banner.svg'
 import StyleButton from '../../../Components/Button/StyleButton';
 import { IoSearchOutline } from 'react-icons/io5'
 import { CiLocationOn } from 'react-icons/ci'
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../../../App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCountry, clearTitle, searchCountry, searchTitle } from '../../../features/auth/searchSlice';
-import { useGetSearchJobsQuery } from '../../../features/auth/searchApi';
-import SearchJobsDetails from './SearchJobs';
-import CategoriesJobsDetails from '../../CategoriesJobs/CategoriesJobsDetails';
 import { toast } from 'react-hot-toast';
-// import SearchJobsDetails from './SearchJobsDetails';
 
 const Banner = () => {
-    // const [keywords, setKeywords] = useState('')  
-    // const [searchItems, setSearchItems] = useState({})
-    // const title = searchItems?.title;
-    // const location = searchItems?.location;
-    // console.log(searchItems)
-
     const searchValue = useSelector((state) => state.search);
     const searchKeywords = { title: searchValue?.title, location: searchValue?.country }
-    // console.log('search value', searchValue)
-    // const { data } = useGetSearchJobsQuery({ title, location })
-    // const searches = { title, location }
-    // console.log('searches', searches)
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
-
-    // const handleJobsSearch = () => {               
-    //     // const searchKeywords = {
-    //     //     title: searchValue?.title,
-    //     //     location: searchValue?.country
-    //     // };
-    //     // if (locations.pathname !== '/search') {
-    //     //     navigate('/search', { state: searchKeywords})
-    //     // }
-    //     // Only set searchItems if either title or location is provided
-    //     // if (searchKeywords.title || searchKeywords.location) {
-    //     //     setSearchItems(searchKeywords);
-    //     //     if (data?.status === 'Success') {
-    //     //         clearCountry();
-    //     //         clearTitle()
-    //     //     }
-    //     // } else {
-    //     //     // If neither title nor location is provided, clear searchItems
-    //     //     setSearchItems({});
-    //     // }
-    // }
 
     const handleJobsSearch = (e) => {
         e.preventDefault()

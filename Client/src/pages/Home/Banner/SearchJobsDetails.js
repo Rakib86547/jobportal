@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardContent, IconButton, Typography } from '@mui/material';
+import { Box, Card, CardContent, IconButton, Typography } from '@mui/material';
 import React from 'react';
 import { BsBookmarkPlus } from 'react-icons/bs';
 import { CiLocationOn } from 'react-icons/ci';
@@ -8,7 +8,6 @@ import { GiMoneyStack } from 'react-icons/gi'
 
 const SearchJobsDetails = ({ job }) => {
     const { img, position, location, job_type, company_infortmation, salary, _id } = job;
-    console.log(job)
     return (
         <Box>
             <Box sx={{
@@ -42,7 +41,7 @@ const SearchJobsDetails = ({ job }) => {
                         <Box sx={{ display: 'flex', padding: '5px 0' }}>
                             <Typography variant="body2" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', marginRight: '15px' }}>
                                 {
-                                    company_infortmation?.map(company_info => <><VscBriefcase className='w-[25px] h-[25px] mr-1' /> {company_info?.industry}</>)
+                                    company_infortmation?.map((company_info, index) => <><VscBriefcase key={index} className='w-[25px] h-[25px] mr-1' /> {company_info?.industry}</>)
                                 }
                             </Typography>
                             <Typography variant="body2" color="text.secondary" sx={{ display: 'flex', alignItems: 'center' }}>
@@ -69,13 +68,6 @@ const SearchJobsDetails = ({ job }) => {
                         </IconButton>
                     </Box>
                 </Card>
-                {/* <Box sx={{ textAlign: 'right' }}>
-                    <Link to={`/api/v1/jobs/job-details/${_id}`}><Button sx={{
-                        color: '#1DBF73',
-                        '&:hover': { color: '#202124', transition: '.3s', background: 'transparent' },
-
-                    }}>View Details</Button></Link>
-                </Box> */}
             </Box>
         </Box>
     );

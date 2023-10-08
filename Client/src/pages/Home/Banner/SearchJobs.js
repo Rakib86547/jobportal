@@ -9,7 +9,6 @@ const SearchJobs = () => {
     const title = locations?.state?.title;
     const location = locations?.state?.location;
     const { data } = useGetSearchJobsQuery({ title, location });
-    console.log(data);
     return (
         <Box sx={{ padding: '50px 0px' }}> 
         <Typography variant='h6' sx={{textAlign: 'center', padding: '20px 0'}}>{data?.data?.length} Jobs Found</Typography>          

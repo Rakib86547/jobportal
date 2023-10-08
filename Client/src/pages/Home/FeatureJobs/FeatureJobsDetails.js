@@ -6,7 +6,8 @@ import { VscBriefcase } from 'react-icons/vsc'
 import { CiLocationOn } from 'react-icons/ci'
 
 const FeatureJobsDetails = ({ job }) => {
-    const { title, company, jobType, location, img } = job;
+    const { position, jobType, location, img, company_infortmation
+    } = job;   
     return (
         <Box>
             <Card sx={{
@@ -20,10 +21,10 @@ const FeatureJobsDetails = ({ job }) => {
                 border: '1px solid #e3f8e2',
                 '&:hover': { boxShadow: '0 6px 15px rgba(64,79,104,.05)' }
             }} className='job-card'>
-                <figure className='w-[50px] mt-[-30px] h-[50px] rounded-full bg-[#e3f8e2]'>
+                <figure className='w-[65px] mt-[-30px] h-[65px] rounded-full'>
                     <img className='' src={img} alt='' />
                 </figure>
-                <CardContent sx={{marginLeft: {lg: '-30px', md:'0'}}}>
+                <CardContent sx={{ marginLeft: { lg: '-30px', md: '0' } }}>
                     <Link>
                         <Typography
                             sx={{
@@ -31,15 +32,17 @@ const FeatureJobsDetails = ({ job }) => {
                                 fontWeight: 500,
                                 '&:hover': { color: 'primary.base', transition: '.3s' }
                             }} gutterBottom variant="h5" component="div">
-                            {title}
+                            {position}
                         </Typography>
                     </Link>
-                    <Box sx={{display: 'flex', padding: '5px 0'}}>
-                        <Typography variant="body2" color="text.secondary" sx={{display: 'flex', alignItems: 'center', marginRight: '15px'}}>
-                           <VscBriefcase className='w-[25px] h-[25px] mr-1' /> {company}
+                    <Box sx={{ display: 'flex', padding: '5px 0' }}>
+                        <Typography variant="body2" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', marginRight: '15px' }}>
+                            {
+                                company_infortmation?.map(company => <><VscBriefcase className='w-[25px] h-[25px] mr-1' /> {company?.company_name}</>)
+                            }
                         </Typography>
-                        <Typography variant="body2" color="text.secondary" sx={{display: 'flex', alignItems: 'center'}}>
-                           <CiLocationOn className='w-[25px] h-[25px]' /> {location}
+                        <Typography variant="body2" color="text.secondary" sx={{ display: 'flex', alignItems: 'center' }}>
+                            <CiLocationOn className='w-[25px] h-[25px]' /> {location}
                         </Typography>
                     </Box>
                     <Typography variant="body2" color="text.secondary" >
@@ -51,7 +54,7 @@ const FeatureJobsDetails = ({ job }) => {
                         <BsBookmarkPlus title='Save' />
                     </IconButton>
                 </Box>
-            </Card>                
+            </Card>
         </Box>
     );
 };

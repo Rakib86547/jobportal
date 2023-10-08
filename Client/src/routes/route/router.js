@@ -26,6 +26,7 @@ import ManageJobDetails from "../../pages/ManageJobs/ManageJobDetails";
 import Applicants from "../../pages/ManageJobs/Applicants";
 import ApplierDetails from "../../pages/ManageJobs/ApplierDetails";
 import SearchJobs from "../../pages/Home/Banner/SearchJobs";
+import MoreFeatureJobs from "../../pages/Home/FeatureJobs/MoreFeatureJobs";
 
 
 
@@ -65,6 +66,10 @@ const router = createBrowserRouter([{
         {
             path: '/search-jobs',
             element: <SearchJobs />
+        },
+        {
+            path: '/all-jobs',
+            element: <MoreFeatureJobs />
         }
     ],
 },
