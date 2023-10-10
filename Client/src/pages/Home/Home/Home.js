@@ -15,8 +15,8 @@ const Home = () => {
             <JobCategories />
             <FeatureJobs />
             <Testimonials />
-            <Company />
-            <PricePackage />
+            {/* <Company /> */}
+            {/* <PricePackage /> */}
         </>
     );
 };

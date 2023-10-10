@@ -26,7 +26,7 @@ const Testimonials = () => {
         cssEase: "linear"
     };
     return (
-        <Box sx={{ padding: '60px 0' }}>
+        <Box sx={{ padding: '60px 0', marginBottom: '40px' }}>
             <Box sx={{ textAlign: 'center', marginBottom: '50px' }}>
                 <SectionTitle title='Our Customers Feedback' />
                 <Typography >Know your worth and find the job that qualify your life</Typography>

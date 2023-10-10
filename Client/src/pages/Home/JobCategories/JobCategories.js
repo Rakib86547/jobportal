@@ -1,25 +1,29 @@
 import { Box, Grid, Typography } from '@mui/material';
-import React from 'react';
+import React, { } from 'react';
 import SectionTitle from '../../../Components/Button/SectionTitle/SectionTitle';
 import JobCategoriesDetails from './JobCategoriesDetails';
 import { useGetCategoriesJobsQuery } from '../../../features/auth/authApi';
 import Loading from '../../../Components/Loading/Loading';
+import { useSelector } from 'react-redux';
+import { useGetAllTotalJobsQuery, useGetTodayJobsQuery } from '../../../features/auth/jobApi';
 
 const JobCategories = () => {
-    
     const { data, isLoading, isError } = useGetCategoriesJobsQuery();
-    // console.log('jobs',data.status, data.data)
+    const { data: todayJobs } = useGetTodayJobsQuery();
+    const {data: totalJob} = useGetAllTotalJobsQuery();
+    // const totalJobs = useSelector((state) => state.totalJob);
+    console.log('total job', totalJob)
     if (isLoading) {
-        return  <Loading />
+        return <Loading />
     }
-    if(isError){
+    if (isError) {
         return <Typography variant='h5'>Something went wrong...</Typography>
     }
     return (
         <Box sx={{ padding: '60px 0' }}>
             <Box sx={{ textAlign: 'center', marginBottom: '50px' }}>
                 <SectionTitle title='Popular Job Categories' />
-                <Typography>2020 jobs live - 293 added today.</Typography>
+                <Typography>{} jobs live - 293 added today.</Typography>
             </Box>
             <Box>
                 <Grid lg={12} item container spacing={3} justifyContent='center'>

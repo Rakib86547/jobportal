@@ -84,8 +84,19 @@ const jobAuth = apiSlice.injectEndpoints({
         }),
 
         getHRJobs: builder.query({
-            query: ({email, page, limit}) => ({
+            query: ({ email, page, limit }) => ({
                 url: `/jobs/hr-jobs/${email}/${page}/${limit}`,
+                method: "GET",
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('userToken')}`
+                }
+            }),
+            providesTags: ["Job"]
+        }),
+        getAllJobs: builder.query({
+            query: ({ page, limit }) => ({
+                url: `/jobs/all-jobs/${page}/${limit}`,
                 method: "GET",
                 headers: {
                     'content-type': 'application/json',
@@ -96,7 +107,7 @@ const jobAuth = apiSlice.injectEndpoints({
         }),
 
         getAllApplier: builder.query({
-            query: ({email, page, limit}) => ({
+            query: ({ email, page, limit }) => ({
                 url: `/jobs/all-applier/${email}/${page}/${limit}`,
                 method: "GET",
                 headers: {
@@ -139,8 +150,40 @@ const jobAuth = apiSlice.injectEndpoints({
                 },
             }),
             invalidatesTags: ["Job"]
-        })
+        }),
+        getTodayJobs: builder.query({
+            url: '/jobs/toady-jobs',
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `Bearer ${localStorage.getItem('userToken')}`
+            },
+        }),       
+        getAllTotalJobs: builder.query({
+            url: '/jobs/total-jobs',
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `Bearer ${localStorage.getItem('userToken')}`
+            },
+        }),       
     })
 });
 
-export const { useGetAllApplierQuery, useGetManageJobQuery, useDeleteApplierMutation, useDeleteJobMutation, useGetHRJobsQuery, usePostJobMutation, useApplyMutation, useGetAppliedJobsQuery, useQuestionsMutation, useGetRipleyQuery, useGetQuestionsQuery, useRipleyMutation } = jobAuth;
+export const {
+    useGetAllTotalJobsQuery,
+    useGetTodayJobsQuery,
+    useGetAllApplierQuery,
+    useGetManageJobQuery,
+    useDeleteApplierMutation,
+    useDeleteJobMutation,
+    useGetHRJobsQuery,
+    usePostJobMutation,
+    useApplyMutation,
+    useGetAppliedJobsQuery,
+    useQuestionsMutation,
+    useGetRipleyQuery,
+    useGetQuestionsQuery,
+    useRipleyMutation,
+    useGetAllJobsQuery
+} = jobAuth;

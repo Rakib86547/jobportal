@@ -15,7 +15,7 @@ const initialState = {
     job_type: '',
     applicants: [],
     queries: [],
-    replies: []
+    replies: [],    
 };
 
 export const jobSlice = createSlice({
@@ -69,6 +69,9 @@ export const jobSlice = createSlice({
         removeJob: (state) => {
             state.job_skills = []
         },
+        setTotalJob: (state, action) => {
+            state.totalJobs = action.payload
+        }
     }
 });
 
@@ -88,6 +91,6 @@ export const {
     removeKey,
     removeSkill,
     removeImage,
-    jobImg
+    jobImg,
 } = jobSlice.actions
 export default jobSlice.reducer
