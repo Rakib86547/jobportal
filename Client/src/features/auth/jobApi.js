@@ -150,15 +150,7 @@ const jobAuth = apiSlice.injectEndpoints({
                 },
             }),
             invalidatesTags: ["Job"]
-        }),
-        getTodayJobs: builder.query({
-            url: '/jobs/toady-jobs',
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'authorization': `Bearer ${localStorage.getItem('userToken')}`
-            },
-        }),       
+        }),     
         getAllTotalJobs: builder.query({
             url: '/jobs/total-jobs',
             method: 'GET',
@@ -172,7 +164,6 @@ const jobAuth = apiSlice.injectEndpoints({
 
 export const {
     useGetAllTotalJobsQuery,
-    useGetTodayJobsQuery,
     useGetAllApplierQuery,
     useGetManageJobQuery,
     useDeleteApplierMutation,

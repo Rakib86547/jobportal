@@ -10,31 +10,29 @@ const featureJobsAuth = apiSlice.injectEndpoints({
                     'content-type': 'application/json',
                     authorization: `Bearer ${localStorage.getItem('userToken')}`
                 }
-            })
+            })           
         }),
-
-        // getAllFeatureJobs: builder.query({
-        //     query: () => ({
-        //         url: '/feature-jobs/all-jobs',
-        //         method: 'GET',
-        //         headers: {
-        //             'content-type': 'application/json',
-        //             authorization: `Bearer ${localStorage.getItem('userToken')}`
-        //         }
-        //     })
-        // }),
-        getAllFeatureJobs: builder.query({
-            query: ({page, limit}) => ({
-                url: `/feature-jobs/all-jobs/${page}/${limit}`,
+        getTotalJobs: builder.query({
+            query: () => ({
+                url: '/feature-jobs/total-jobs',
                 method: "GET",
                 headers: {
                     'content-type': 'application/json',
                     'authorization': `Bearer ${localStorage.getItem('userToken')}`
                 }
             }),
-            providesTags: ["Job"]
         }),
+        getTodayJobs: builder.query({
+            query: () => ({
+                url: '/feature-jobs/today-jobs',
+                method: "GET",
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('userToken')}`
+                }
+            }),
+        }),       
     })   
 });
 
-export const { useGetFeatureJobsQuery, useGetAllFeatureJobsQuery } = featureJobsAuth
+export const { useGetFeatureJobsQuery, useGetTotalJobsQuery, useGetTodayJobsQuery } = featureJobsAuth
