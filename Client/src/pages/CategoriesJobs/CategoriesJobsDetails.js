@@ -6,7 +6,8 @@ import { CiLocationOn } from 'react-icons/ci';
 import { BsBookmarkPlus } from 'react-icons/bs';
 
 const CategoriesJobsDetails = ({ job }) => {
-    const { company, jobType, location, img, _id, position } = job;
+    const { jobType, location, img, _id, position, company_infortmation } = job;
+    console.log(job)
     return (
         <Box sx={{
             border: '1px solid #e3f8e2',
@@ -18,10 +19,10 @@ const CategoriesJobsDetails = ({ job }) => {
                 justifyContent: 'space-between',
                 boxShadow: 'none',
             }} className='job-card'>
-                <figure className='w-[50px] mt-[-30px] h-[50px] rounded-full bg-[#e3f8e2]'>
+                <figure className='w-[50px] h-[50px] mt-[-55px] rounded-full'>
                     <img className='' src={img} alt='' />
                 </figure>
-                <CardContent sx={{ marginLeft: { lg: '-30px', md: '0' } }}>
+                <CardContent sx={{ marginLeft: { lg: '0px', md: '0' } }}>
                     <>
                         <Typography
                             sx={{
@@ -33,7 +34,9 @@ const CategoriesJobsDetails = ({ job }) => {
                     </>
                     <Box sx={{ display: 'flex', padding: '5px 0' }}>
                         <Typography variant="body2" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', marginRight: '15px' }}>
-                            <VscBriefcase className='w-[25px] h-[25px] mr-1' /> {company}
+                            {
+                                company_infortmation.map(company => <Typography><VscBriefcase className='w-[25px] h-[25px] mr-1' /> {company?.company_name}</Typography>)
+                            }
                         </Typography>
                         <Typography variant="body2" color="text.secondary" sx={{ display: 'flex', alignItems: 'center' }}>
                             <CiLocationOn className='w-[25px] h-[25px]' /> {location}
@@ -50,10 +53,10 @@ const CategoriesJobsDetails = ({ job }) => {
                 </Box>
 
             </Card>
-            <Box sx={{textAlign: 'right'}}>
+            <Box sx={{ textAlign: 'right' }}>
                 <Link to={`/api/v1/jobs/job-details/${_id}`}><Button sx={{
                     color: '#1DBF73',
-                    '&:hover': {color: '#202124', transition: '.3s', background: 'transparent'},
+                    '&:hover': { color: '#202124', transition: '.3s', background: 'transparent' },
 
                 }}>View Details</Button></Link>
             </Box>

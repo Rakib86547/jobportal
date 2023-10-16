@@ -62,14 +62,18 @@ const Navbar = () => {
                             Home
                         </NavLink>
 
-                        <NavLink to='/find-jobs'
+                        {/* <NavLink to='/find-jobs'
                             className={({ isActive }) => isActive ? 'text-[#1DBF73]' : undefined}>
                             Find Jobs
-                        </NavLink>
+                        </NavLink> */}
 
                         <NavLink to='/contact'
                             className={({ isActive }) => isActive ? 'text-[#1DBF73]' : undefined}>
                             Contact
+                        </NavLink>
+                        <NavLink to='/about'
+                            className={({ isActive }) => isActive ? 'text-[#1DBF73]' : undefined}>
+                            About Us
                         </NavLink>
                         <NavLink>
                             <StyleButton title='Login / Register' className='bg-[#1DBF73] duration-500 hover:bg-[#1DBF73] py-2 px-5 rounded'></StyleButton>
@@ -93,14 +97,18 @@ const Navbar = () => {
                                 Home
                             </NavLink>
 
-                            <NavLink to='/find-jobs'
+                            {/* <NavLink to='/find-jobs'
                                 className={({ isActive }) => isActive ? 'text-[#1DBF73]' : undefined}>
                                 Find Jobs
-                            </NavLink>
+                            </NavLink> */}
 
                             <NavLink to='/contact'
                                 className={({ isActive }) => isActive ? 'text-[#1DBF73]' : undefined}>
                                 Contact
+                            </NavLink>
+                            <NavLink to='/about'
+                                className={({ isActive }) => isActive ? 'text-[#1DBF73]' : undefined}>
+                                About Us
                             </NavLink>
                             {
                                 user?.email && <NavLink to='/dashboard'

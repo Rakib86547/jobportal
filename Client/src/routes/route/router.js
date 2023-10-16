@@ -27,6 +27,7 @@ import Applicants from "../../pages/ManageJobs/Applicants";
 import ApplierDetails from "../../pages/ManageJobs/ApplierDetails";
 import SearchJobs from "../../pages/Home/Banner/SearchJobs";
 import MoreFeatureJobs from "../../pages/Home/FeatureJobs/MoreFeatureJobs";
+import About from "../../pages/About/About";
 
 
 
@@ -46,6 +47,10 @@ const router = createBrowserRouter([{
         {
             path: '/contact',
             element: <Contact />
+        },
+        {
+            path: '/about',
+            element: <About />
         },
         {
             path: '/login',
