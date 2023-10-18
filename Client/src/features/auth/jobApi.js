@@ -13,9 +13,19 @@ const jobAuth = apiSlice.injectEndpoints({
                 body: applyData
             })
         }),
+        // getAppliedJobs: builder.query({
+        //     query: (email) => ({
+        //         url: `/jobs/my-jobs/${email}`,
+        //         method: "GET",
+        //         headers: {
+        //             'content-type': 'application/json',
+        //             authorization: `Bearer ${localStorage.getItem('userToken')}`
+        //         }
+        //     })
+        // }),
         getAppliedJobs: builder.query({
-            query: (email) => ({
-                url: `/jobs/my-jobs/${email}`,
+            query: ({email, page, limit}) => ({
+                url: `/jobs/my-jobs/${email}/${page}/${limit}`,
                 method: "GET",
                 headers: {
                     'content-type': 'application/json',

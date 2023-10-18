@@ -99,6 +99,7 @@ const JobDetails = () => {
         const newTab = window.open(url, '_blank', 'noopener,noreferrer')
         if(newTab) newTab.opener = null
     }
+
     return (
         <Box sx={{ padding: '60px 0px' }}>
             <Box sx={{
@@ -131,7 +132,10 @@ const JobDetails = () => {
 
                             <Box sx={{ display: 'flex', padding: '5px 0' }}>
                                 <Typography variant="body2" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', marginRight: '15px' }}>
-                                    <VscBriefcase className='w-[25px] h-[25px] mr-1' /> {jobData.data?.company}
+                                  {
+                                    jobData?.data?.company_infortmation.map(company => <><VscBriefcase className='w-[25px] h-[25px] mr-1' /> {company?.company_name}</>)
+                                  }
+                                   
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary" sx={{ display: 'flex', alignItems: 'center' }}>
                                     <CiLocationOn className='w-[25px] h-[25px]' /> {jobData.data?.location}

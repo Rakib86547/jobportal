@@ -22,7 +22,7 @@ const About = () => {
                         <CountUp
                             start={0}
                             end={4}
-                            delay={1}
+                            delay={0}
                             suffix='M'
                         >
                             {({ countUpRef }) => (
@@ -38,7 +38,7 @@ const About = () => {
                         <CountUp
                             start={0}
                             end={12}
-                            delay={1}
+                            delay={0}
                             suffix='K'
                         >
                             {({ countUpRef }) => (
@@ -53,7 +53,7 @@ const About = () => {
                         <CountUp
                             start={0}
                             end={20}
-                            delay={1}
+                            delay={0}
                             suffix='M'
                         >
                             {({ countUpRef }) => (

@@ -48,7 +48,6 @@ export const passwordReset = createAsyncThunk('auth/passwordReset', async (email
     try {
         const data = await sendPasswordResetEmail(auth, email)
         if (data) {
-            console.log(data)
             toast.success('Please Check Your Email & Reset With New Password')
             return data;
         }
@@ -120,7 +119,6 @@ export const authSlice = createSlice({
                 state.isError = false;
             })
             .addCase(createUser.fulfilled, (state, { payload }) => {
-                console.log('user :', payload.user.email)
                 state.user.email = payload.user.email;
                 state.isLoading = false;
                 state.isError = false;

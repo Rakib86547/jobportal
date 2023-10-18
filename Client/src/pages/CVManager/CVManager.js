@@ -25,7 +25,6 @@ const CVManager = () => {
     }
     // ---- handle delete file -----
     const handleDeleteFIle = () => {
-        console.log('delete');
         const id = currentData?.data?._id
         deleteFile(id)
     }
@@ -91,13 +90,13 @@ const CVManager = () => {
                         <DeleteOutlineOutlinedIcon sx={{ color: 'red' }} title='Delete' />
                     </IconButton>
 
-                    <IconButton sx={{
+                    {/* <IconButton sx={{
                         position: 'absolute',
                         top: -8,
                         right: 30,
                     }}>
                         <Link onClick={() => openLinkInNewTab(`${currentData?.data?.path}`)}><VisibilityOutlinedIcon className='cursor-pointer' title='See' /></Link>
-                    </IconButton>
+                    </IconButton> */}
                 </Box>}
             </Box>
 

@@ -11,7 +11,6 @@ const totalPagesCalculator = (total, limit) => {
     const pages = [];
     for (let x = 1; x <= parseInt(total) / limit; x++) {
         pages.push(x);
-        console.log(pages)
     }
 
     return pages;

@@ -1,6 +1,6 @@
 import { Box, Hidden, IconButton, Stack } from '@mui/material';
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import logo from '../../../assests/Logo/logo.png';
 import StyleButton from '../../../Components/Button/StyleButton';
 import { VscThreeBars } from 'react-icons/vsc'
@@ -12,11 +12,11 @@ import auth from '../../../firebase/firebase.config';
 import { logOut } from '../../../features/auth/authSlice';
 
 const Navbar = () => {
+    const navigate = useNavigate()
     const [open, setOpen] = useState(true);
     const [modalOpen, setModalOpen] = useState(false);
     const { user } = useSelector(state => state.auth);
     const dispatch = useDispatch()
-    // console.log('uid', user)
     let responseClassName;
     if (open) {
         responseClassName = 'left-[-100%] duration-500'
@@ -35,6 +35,7 @@ const Navbar = () => {
         signOut(auth)
             .then(() => {
                 dispatch(logOut())
+                navigate('/')
             })
     }
     return (

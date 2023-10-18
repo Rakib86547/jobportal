@@ -18,7 +18,6 @@ const EducationalModal = ({ open, handleClose, setOpen }) => {
     const education = useSelector((state) => state.education.educations);
     const user = useSelector((state) => state.auth.user);
     const [postEducation, { isLoading, isSuccess }] = usePostEducationMutation();
-    console.log('education: ', education)
     const handlePostEducation = () => {
         const data = {
             degree_name: education.degree_name,

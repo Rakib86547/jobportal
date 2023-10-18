@@ -7,7 +7,6 @@ import { BsBookmarkPlus } from 'react-icons/bs';
 
 const CategoriesJobsDetails = ({ job }) => {
     const { jobType, location, img, _id, position, company_infortmation } = job;
-    console.log(job)
     return (
         <Box sx={{
             border: '1px solid #e3f8e2',

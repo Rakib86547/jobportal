@@ -23,7 +23,6 @@ const AddExperienceModal = ({ open, handleClose }) => {
             email: user?.email
         }
         postWork(data)
-        console.log('work')
     };
     if(isSuccess){
         toast.success('Your Work Experience is Added');

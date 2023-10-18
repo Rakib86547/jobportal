@@ -22,7 +22,6 @@ const workSlice = createSlice({
     initialState,
     reducers: {
         jobTitle: (state, action) => {
-            console.log(action)
             state.addWork.job_title = action.payload
         },
         company: (state, action) => {

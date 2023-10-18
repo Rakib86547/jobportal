@@ -20,7 +20,6 @@ const AllApplicants = () => {
     if (isLoading) {
         return <Loading />
     }
-    console.log('all applicants', data)
     return (
         <Box>
             <TableContainer component={Paper} sx={{ padding: '0px 25px', paddingBottom: '20px' }}>
